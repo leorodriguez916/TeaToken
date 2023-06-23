@@ -15,16 +15,21 @@ import Checkout from "./components/Checkout";
 import UserLayout from "./layouts/UserLayout";
 import Shop from "./components/Shop";
 import NotFound from "./components/NotFound";
-import OrderHistory from "./components/OrderHistory";
+import OrderHistory from "./components/account/OrderHistory";
+import AccountDetails from "./components/account/AccountDetails";
+import Payments from "./components/account/Payments";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
-      <Route path="checkout" element={<Checkout />}></Route>
-      <Route path="account" element={<UserLayout />}></Route>
-      <Route path="shop" element={<Shop />}></Route>
-      <Route path="*" element={<NotFound />}></Route>
-      <Route path="account/orders" element={<OrderHistory />}></Route>
+      <Route path="checkout" element={<Checkout />} />
+      <Route path="shop" element={<Shop />} />
+      <Route path="*" element={<NotFound />} />
+      <Route path="account" element={<UserLayout />}>
+        <Route path="orders" element={<OrderHistory />} />
+        <Route path="details" element={<AccountDetails />} />
+        <Route path="payments" element={<Payments />} />
+      </Route>
     </Route>
   )
 );

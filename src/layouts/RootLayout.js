@@ -48,11 +48,11 @@ export default function RootLayout() {
               <NavLink to="/">TeaTokens</NavLink>
             </Text>
             <Spacer />
-            <NavLink to="/checkout">
-              <Icon as={AiOutlineShoppingCart} w="7" h="7" />
-            </NavLink>
             <NavLink to="/account">
               <Icon as={AiOutlineSmile} w="7" h="7" />
+            </NavLink>
+            <NavLink to="/checkout">
+              <Icon as={AiOutlineShoppingCart} w="7" h="7" />
             </NavLink>
           </HStack>
         </Container>
