@@ -15,7 +15,7 @@ import {
 let isAdmin = true;
 
 export default function Shop() {
-  return <MyGrid></MyGrid>;
+  return <MyGrid>Here it is</MyGrid>;
 }
 
 // {this.props.products

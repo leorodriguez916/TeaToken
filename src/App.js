@@ -11,6 +11,7 @@ import {
   createRoutesFromElements,
 } from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
+import Home from "./components/Home";
 import Checkout from "./components/Checkout";
 import UserLayout from "./layouts/UserLayout";
 import Shop from "./components/Shop";
@@ -22,6 +23,7 @@ import Payments from "./components/account/Payments";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
+      <Route index element={<Home />} />
       <Route path="checkout" element={<Checkout />} />
       <Route path="shop" element={<Shop />} />
       <Route path="*" element={<NotFound />} />
