@@ -51,30 +51,35 @@ async function seed() {
   //Example product data.
   const products = await Promise.all([
     Product.create({
-      name: "Earl Grey",
+      name: "Earl Grey Tea",
       price: 15.99,
+      imageSrc: "earlgrey.webp",
       description:
         "Straight outta Britain, this black tea has notes of lavender that will straight up put you to sleep.",
     }),
     Product.create({
-      name: "White Peach",
+      name: "White Peach Tea",
       price: 18.99,
+      imageSrc: "whitepeach.webp",
       description: "Summertime vibes, if you like that then buy it.",
     }),
     Product.create({
-      name: "Ginger",
+      name: "Ginger Tea",
       price: 18.99,
+      imageSrc: "ginger.webp",
       description: "So spicy! Not really, but, you know.",
     }),
     Product.create({
       name: "Mint Leaves",
       price: 18.99,
+      imageSrc: "mintleaves.png",
       description:
         "Who doesn't love mint? You, if you don't add this to your cart.",
     }),
     Product.create({
-      name: "Black Rose",
+      name: "Black Rose Tea",
       price: 18.99,
+      imageSrc: "blackrose.png",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
     }),
@@ -117,6 +122,7 @@ async function seed() {
         through: {
           numItems: 1,
           totalPrice: randProducts[j].price,
+          imageSrc: "",
           userId: users[i].id,
         },
       });

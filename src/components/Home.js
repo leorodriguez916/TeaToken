@@ -15,7 +15,7 @@ export default function Home() {
           alt="Fresh matcha leaves."
         />
       </Flex>
-      <NavLink to="shop">
+      <NavLink to="products">
         <Button w="100%" {...buttonStyle()}>
           Shop Now!{" "}
         </Button>

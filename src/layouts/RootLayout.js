@@ -90,9 +90,6 @@ export default function RootLayout() {
 
       <main>
         <Outlet />
-        <Text p="10px" align="center">
-          Hello
-        </Text>
       </main>
     </div>
   );
