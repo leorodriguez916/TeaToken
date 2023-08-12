@@ -8,7 +8,9 @@ module.exports = router;
 //Access all users as an admin
 router.get("/", async (req, res, next) => {
   try {
-    const users = await User.findAll({ attributes: ["id", "username"] });
+    const users = await User.findAll({
+      attributes: ["id", "username", "email", "imageSrc", "role"],
+    });
     res.json(users);
   } catch (err) {
     next(err);
@@ -20,7 +22,7 @@ router.get("/", async (req, res, next) => {
 router.get("/:id", async (req, res, next) => {
   try {
     const user = await User.findByPk(req.params.id, {
-      attributes: ["id", "username", "email", "imageUrl", "role"],
+      attributes: ["id", "username", "email", "imageSrc", "role"],
       include: { model: Order, include: Product },
     });
     if (!user) {

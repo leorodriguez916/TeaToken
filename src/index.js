@@ -5,7 +5,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 const colors = {
   tea: {
-    dark: "#151618",
+    dark: "#004002",
     green: "#556b2f",
     matcha: "#a9a454",
     light: { 50: "#F3F3F2", 100: "#f8f4ed", 200: "#efe4d4" },

@@ -1,41 +1,53 @@
 import React from "react";
-import { Button, SimpleGrid } from "@chakra-ui/react";
+import { Button, HStack, Center } from "@chakra-ui/react";
 import { Outlet, NavLink } from "react-router-dom";
-import { buttonStyle } from "../Styles";
+import { buttonStyle, adminStyle } from "../Styles";
 import MyGrid from "../components/UI/MyGrid";
 
-export default function UserPage() {
-  return (
-    <div>
-      <SimpleGrid
+/*
+<SimpleGrid
         columns={{ sm: 1, md: 4, lg: 4 }}
         spacing={1.5}
         ml="40px"
         mr="40px"
         mb="3rem"
       >
-        <NavLink to="orders">
-          <Button w="100%" {...buttonStyle()}>
-            Order History{" "}
-          </Button>
-        </NavLink>
-        <NavLink to="details">
-          <Button w="100%" {...buttonStyle()}>
-            Account Details{" "}
-          </Button>
-        </NavLink>
-        <NavLink to="payments">
-          <Button w="100%" {...buttonStyle()}>
-            Manage Payments
-          </Button>
-        </NavLink>
-        <NavLink to="signout">
-          <Button w="100%" {...buttonStyle()}>
-            Sign Out
-          </Button>
-        </NavLink>
-      </SimpleGrid>
+      */
 
+export default function UserPage() {
+  const isAdmin = true;
+
+  return (
+    <div>
+      <Center>
+        <HStack justify="center" ml="30px" mr="30px" wrap="wrap">
+          <NavLink to="orders">
+            <Button w="100%" {...buttonStyle()}>
+              Order History{" "}
+            </Button>
+          </NavLink>
+          <NavLink to="details">
+            <Button {...buttonStyle()}>Account Details </Button>
+          </NavLink>
+          <NavLink to="payments">
+            <Button w="100%" {...buttonStyle()}>
+              Manage Payments
+            </Button>
+          </NavLink>
+          <NavLink to="signout">
+            <Button w="100%" {...buttonStyle()}>
+              Sign Out
+            </Button>
+          </NavLink>
+          {isAdmin && (
+            <NavLink to="users">
+              <Button w="100%" {...adminStyle()}>
+                Users List{" "}
+              </Button>
+            </NavLink>
+          )}
+        </HStack>
+      </Center>
       <Outlet />
     </div>
   );

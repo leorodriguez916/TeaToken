@@ -1,11 +1,11 @@
 //Action constants.
-const GOT_USER = "GOT_USER";
-const GOT_USERS = "GOT_USERS";
-const EDIT_USER = "EDIT_USER";
-const CREATE_USER = "CREATE_USER";
-const DELETE_USER = "DELETE_USER";
+export const GOT_USER = "GOT_USER";
+export const GOT_USERS = "GOT_USERS";
+export const EDIT_USER = "EDIT_USER";
+export const CREATE_USER = "CREATE_USER";
+export const DELETE_USER = "DELETE_USER";
 
-const userState = {
+export const userState = {
   allUsers: [],
   singleUser: {},
 };
@@ -14,9 +14,9 @@ const userState = {
 export const userReducer = (state = userState, action) => {
   switch (action.type) {
     case GOT_USER:
-      return { ...state };
+      return { ...state, singleUser: { ...action.user } };
     case GOT_USERS:
-      return;
+      return { ...state, allUsers: [...action.users] };
     case EDIT_USER:
       return;
     case CREATE_USER:

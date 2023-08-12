@@ -38,10 +38,9 @@ const User = db.define("user", {
       isEmail: true,
     },
   },
-  imageUrl: {
+  imageSrc: {
     type: Sequelize.STRING,
-    defaultValue:
-      "https://e6.pngbyte.com/pngpicture/76945/png-default-image-png-Default-Profile_thumbnail.png",
+    defaultValue: "user.jpeg",
   },
   role: {
     type: Sequelize.ENUM("admin", "customer"),

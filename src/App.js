@@ -17,6 +17,7 @@ import UserLayout from "./layouts/UserLayout";
 import Products from "./components/Products";
 import SingleProduct from "./components/SingleProduct";
 import NotFound from "./components/NotFound";
+import Users from "./components/account/Users";
 import OrderHistory from "./components/account/OrderHistory";
 import AccountDetails from "./components/account/AccountDetails";
 import Payments from "./components/account/Payments";
@@ -37,6 +38,7 @@ const router = createBrowserRouter(
         <Route path="orders" element={<OrderHistory />} />
         <Route path="details" element={<AccountDetails />} />
         <Route path="payments" element={<Payments />} />
+        <Route path="users" element={<Users />} />
       </Route>
     </Route>
   )

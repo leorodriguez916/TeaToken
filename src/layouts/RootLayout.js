@@ -1,6 +1,6 @@
 import React from "react";
 import MyGrid from "../components/UI/MyGrid";
-import { inputStyle, buttonStyle } from "../Styles";
+import { inputStyle, buttonStyle, adminStyle } from "../Styles";
 import {
   AiOutlineShoppingCart,
   AiOutlineSmile,
@@ -18,6 +18,7 @@ import {
   GridItem,
   Heading,
   Input,
+  Button,
 } from "@chakra-ui/react";
 import { NavLink, Outlet } from "react-router-dom";
 
@@ -79,11 +80,11 @@ export default function RootLayout() {
             onClick={handleSearch}
           />
           {isAdmin && (
-            <Box as="button" {...buttonStyle()}>
-              <Link to="/products/create">
-                <Text>Create Product</Text>
-              </Link>
-            </Box>
+            <NavLink to="/products/create">
+              <Button w="100%" maxW="200px" minW="150px" {...adminStyle()}>
+                Create Product
+              </Button>
+            </NavLink>
           )}
         </GridItem>
       </MyGrid>

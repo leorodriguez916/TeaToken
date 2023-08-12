@@ -12,24 +12,24 @@ import {
   Heading,
   Select,
 } from "@chakra-ui/react";
-import { GOT_PRODUCT, productState } from "../reducers/productReducer";
+import { GOT_USER, userState } from "../reducers/userReducer";
 import { useReducer, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { productReducer } from "../reducers/productReducer";
+import { userReducer } from "../reducers/userReducer";
 import { buttonStyle } from "../Styles";
 import axios from "axios";
 
-export default function SingleProduct(auth = { id: 1, role: "none" }) {
-  const [products, dispatch] = useReducer(productReducer, productState);
+export default function SingleUser(auth = { id: 1, role: "none" }) {
+  const [users, dispatch] = useReducer(userReducer, userState);
   const { id } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const { data } = await axios.get(
-          `http://localhost:3001/api/products/${id}`
+          `http://localhost:3001/api/users/${id}`
         );
-        dispatch({ type: GOT_PRODUCT, product: data });
+        dispatch({ type: GOT_USER, user: data });
       } catch (error) {
         console.log(error);
       }
@@ -37,13 +37,13 @@ export default function SingleProduct(auth = { id: 1, role: "none" }) {
     fetchData();
   }, []);
 
-  const product = products.singleProduct;
+  const user = users.singleUser;
 
-  console.log(product);
+  console.log(user);
 
-  const url = `../${product.imageSrc}`;
+  const url = `../${user.imageSrc}`;
 
-  return product.id ? (
+  return user.id ? (
     <Center>
       <HStack>
         <VStack pl="30px" m="20px">
@@ -52,10 +52,10 @@ export default function SingleProduct(auth = { id: 1, role: "none" }) {
           <HStack spacing="10px">
             {" "}
             <Text color="tea.green">Price:</Text> <Spacer />
-            <Text color="tea.matcha">{product.price}</Text> <Spacer />
+            <Text color="tea.matcha">{user.price}</Text> <Spacer />
             {auth.id && auth.role === "admin" && (
               <Button
-                onClick={() => deleteProduct(product.id)}
+                onClick={() => deleteUser(user.id)}
                 m="10px"
                 colorScheme="red"
                 borderRadius="full"
@@ -69,9 +69,9 @@ export default function SingleProduct(auth = { id: 1, role: "none" }) {
         <Spacer />
         <VStack align="left" pr="30px" m="20px">
           <Heading size="lg" color="tea.brown">
-            {product.name}
+            {user.name}
           </Heading>
-          <Text>{product.description}</Text>
+          <Text>{user.description}</Text>
           <HStack>
             <Select mt="10px" mr="10px" maxW="100px" placeholder="Qty">
               <option value="1">1</option>
