@@ -1,31 +1,15 @@
-import React, { useContext } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Grid,
-  GridItem as Gi,
-  VStack,
-  Image,
-  Heading,
-  Text,
-  HStack,
-  Button,
-  Spacer,
-  Center,
-} from "@chakra-ui/react";
-import { ProductContext } from "../contexts/productContext";
-import { deleteProduct } from "../reducers/productReducer";
-// import ProductToCartBtn from "./ProductToCartBtn";
-import { buttonStyle } from "../Styles";
+import { VStack, Image, Text, HStack, Button } from "@chakra-ui/react";
+import { buttonStyle, adminStyle } from "../Styles";
 
 export default function ListProduct({
   product,
-  auth = { id: 1, role: "none" },
-  deleteProduct,
+  deleteProduct = {},
+  auth = { id: 1, role: "admin" },
   view = false,
 }) {
-  const { dispatch } = useContext(ProductContext);
-
-  return (
+  return product ? (
     <VStack
       maxW="350px"
       minW="325px"
@@ -40,50 +24,20 @@ export default function ListProduct({
       </Text>
       <HStack spacing="10px">
         {" "}
-        <Text color="tea.matcha">{product.price}</Text> <Spacer />
+        <Text color="tea.matcha" mr="5px">
+          {product.price}
+        </Text>
         <Button {...buttonStyle()}>Add</Button>
         {auth.id && auth.role === "admin" && (
           <Button
-            onClick={() => deleteProduct(product.id)}
+            onClick={() => deleteProduct(product)}
             m="10px"
-            colorScheme="red"
-            borderRadius="full"
-            size="xs"
+            {...adminStyle()}
           >
             x{" "}
           </Button>
         )}
       </HStack>
     </VStack>
-  );
-
-  // return (
-  //   <Gi>
-  //     <VStack
-  //       spacing="2px"
-  //       align="start"
-  //       as={Link}
-  //       to={`/products/${product.id}`}
-  //     >
-  //       <Image boxSize="150px" src={product.imageSrc} alt="tea image" />
-  //       <Heading color="tea.matcha">{product.name}</Heading>
-
-  //       {!view && <Text fontSize="lg">${product.price}</Text>}
-  //     </VStack>
-
-  //     {!view && (
-  //       <HStack>
-  //         <Button marginTop="2" product={product} btnStyle="outline" />
-  //         <Spacer />
-  //         {auth.id && auth.role === "admin" && (
-  //           <Button colorScheme="red" borderRadius="full" size="xs">
-  //             X
-  //           </Button>
-  //         )}
-  //       </HStack>
-  //     )}
-  //   </Gi>
-  // );
+  ) : null;
 }
-
-//onClick={() => deleteProduct(product.id)}

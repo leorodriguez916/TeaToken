@@ -25,6 +25,7 @@ import ProductContextProvider from "./contexts/productContext";
 import CartContextProvider from "./contexts/cartContext";
 import AppContextProvider from "./contexts/GlobalState";
 import GlobalState from "./contexts/GlobalState";
+import SingleUser from "./components/account/SingleUser";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -38,7 +39,8 @@ const router = createBrowserRouter(
         <Route path="orders" element={<OrderHistory />} />
         <Route path="details" element={<AccountDetails />} />
         <Route path="payments" element={<Payments />} />
-        <Route path="users" element={<Users />} />
+        <Route path="users" element={<Users />}></Route>
+        <Route path="users/:id" element={<SingleUser />} />
       </Route>
     </Route>
   )

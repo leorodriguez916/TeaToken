@@ -1,55 +1,48 @@
-import React, { useEffect, useContext, useReducer, useState } from "react";
+import React, { useEffect, useContext, useReducer } from "react";
 import MyGrid from "./UI/MyGrid";
-import { inputStyle, buttonStyle } from "../Styles";
+
 import ListProduct from "./ListProduct";
-import {
-  GridItem,
-  Heading,
-  HStack,
-  Input,
-  Box,
-  Link,
-  Text,
-  Flex,
-  Center,
-} from "@chakra-ui/react";
+import { Center } from "@chakra-ui/react";
 import { CartContext } from "../contexts/cartContext";
 import { ProductContext } from "../contexts/productContext";
-import {
-  productReducer,
-  productState,
-  GOT_PRODUCTS,
-} from "../reducers/productReducer";
+import { DELETE_PRODUCT } from "../reducers/productReducer";
 import axios from "axios";
 
 export default function Products() {
-  const [products, dispatch] = useReducer(productReducer, productState);
+  const { products, dispatch, getProducts } = useContext(ProductContext);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const { data } = await axios.get(`http://localhost:3001/api/products`);
-        dispatch({ type: GOT_PRODUCTS, products: data });
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchData();
+    getProducts();
   }, []);
 
-  console.log(products);
+  const deleteProduct = async (product) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:3001/api/products/${product.id}`
+      );
+      dispatch({ type: DELETE_PRODUCT, product: product });
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-  return (
+  return products ? (
     <MyGrid minW="375px" m="30px" p="30px" gap="1.5rem" justifyContent="center">
       {products.allProducts[0]
         ? products.allProducts.map((product) => (
             <Center key={product.id}>
-              <ListProduct key={product.id} product={product} />
+              <ListProduct
+                key={product.id}
+                product={product}
+                products={products}
+                dispatch={dispatch}
+                deleteProduct={deleteProduct}
+              />
             </Center>
           ))
         : null}
     </MyGrid>
-  );
+  ) : null;
 }
 
 // {this.props.products
@@ -60,3 +53,17 @@ export default function Products() {
 //   .map((product) => {
 //     return <ProductItem key={product.id} product={product} />;
 //   })}
+
+// useEffect(() => {
+//   const fetchData = async () => {
+//     try {
+//       const { data } = await axios.get(`http://localhost:3001/api/products`);
+//       dispatch({ type: GOT_PRODUCTS, products: data });
+//     } catch (err) {
+//       console.log(err);
+//     }
+//   };
+//   fetchData();
+// }, []);
+
+// const [products, dispatch] = useReducer(productReducer, {});

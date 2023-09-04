@@ -45,7 +45,9 @@ export default function ListUser({
     };
   }
 
-  return (
+  let isAdmin = true;
+
+  return isAdmin ? (
     <VStack
       wrap="wrap"
       maxW="350px"
@@ -62,22 +64,30 @@ export default function ListUser({
         alt="user image"
       ></Image>
       <Text color="tea.green">
-        <Link to={`/users/${user.id}`}>{user.username}</Link>
+        <Link to={`${user.id}`}>{user.username}</Link>
       </Text>{" "}
-      <Text color="tea.matcha">Email: {user.email}</Text>
-      <Text casing="capitalize" color="tea.matcha">
-        Status: {user.role ? user.role : "Customer"}
-      </Text>
+      <HStack>
+        <Text as="b" color="tea.matcha">
+          Email:
+        </Text>
+        <Text color="tea.matcha">{user.email}</Text>
+      </HStack>
+      <HStack>
+        <Text as="b" casing="capitalize" color="tea.matcha">
+          Status:
+        </Text>
+        <Text casing="capitalize" color="tea.matcha">
+          {user.role ? user.role : "Customer"}
+        </Text>
+      </HStack>
       <Spacer />
-      {auth.id && auth.role === "admin" && (
-        <Link to={`${user.id}`}>
-          <Button w="100%" maxW="200px" minW="150px" {...adminStyle()}>
-            Options{" "}
-          </Button>
-        </Link>
-      )}
+      <Link to={`${user.id}`}>
+        <Button w="100%" maxW="200px" minW="150px" {...adminStyle()}>
+          Options{" "}
+        </Button>
+      </Link>
     </VStack>
-  );
+  ) : null;
 
   // return (
   //   <Gi>
@@ -124,3 +134,11 @@ export default function ListUser({
           Options{" "}
         </Button>
         */
+
+/*
+{auth.id && auth.role === "admin" && (
+
+  admin stuff
+
+  ) }
+  */

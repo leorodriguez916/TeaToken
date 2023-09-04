@@ -24,8 +24,6 @@ import { NavLink, Outlet } from "react-router-dom";
 
 export default function RootLayout() {
   const navStyles = {
-    mt: "0px",
-    mb: "30px",
     ml: "40px",
     mr: "40px",
     color: "tea.brown",
@@ -42,22 +40,31 @@ export default function RootLayout() {
 
   return (
     <div>
-      <Box sx={navStyles}>
-        <Container>
-          <HStack fontSize="1.4rem" pt={12} spacing="3rem">
-            <Text>
-              <NavLink to="/">TeaTokens</NavLink>
-            </Text>
-            <Spacer />
-            <NavLink to="/account">
-              <Icon as={AiOutlineSmile} w="7" h="7" />
-            </NavLink>
-            <NavLink to="/checkout">
-              <Icon as={AiOutlineShoppingCart} w="7" h="7" />
-            </NavLink>
-          </HStack>
-        </Container>
-      </Box>
+      <MyGrid mb="0.5rem" pl="50px" pr="50px" border-bottom="1px solid black">
+        <GridItem gridColumn="1 / -1" as={HStack} spacing="2rem" sx={navStyles}>
+          <Heading textTransform={"lowercase"}>
+            <NavLink to="/">TeaTokens</NavLink>
+          </Heading>
+          <Spacer />
+          <NavLink to="/account">
+            <Icon as={AiOutlineSmile} w="7" h="7" />
+          </NavLink>
+          <NavLink to="/checkout">
+            <Icon as={AiOutlineShoppingCart} w="7" h="7" />
+          </NavLink>
+
+          <Button
+            minW="80px"
+            maxW="200px"
+            w="100%"
+            {...buttonStyle()}
+            color="tea.brown"
+            bgColor="tea.light.50"
+          >
+            Log In{" "}
+          </Button>
+        </GridItem>
+      </MyGrid>
 
       <MyGrid mb="3rem" ml="50px" mr="50px">
         <GridItem gridColumn="1 / -1" as={HStack} spacing="2rem">

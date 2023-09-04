@@ -9,7 +9,7 @@ app.use(morgan("dev"));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, DELETE");
   res.setHeader("Access-Control-Allow-Headers", "Content-Type");
   next();
 });
@@ -20,17 +20,17 @@ app.use(express.json());
 //Route to API folder with CRUD operations.
 app.use("/api", require("./api"));
 
-app.get("/", (req, res) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Credentials", "true");
-  res.setHeader("Access-Control-Max-Age", "1800");
-  res.setHeader("Access-Control-Allow-Headers", "content-type");
-  res.setHeader(
-    "Access-Control-Allow-Methods",
-    "PUT, POST, GET, DELETE, PATCH, OPTIONS"
-  );
-  res.sendFile(path.join(__dirname, "..", "public/index.html"));
-});
+// app.get("/", (req, res) => {
+//   res.setHeader("Access-Control-Allow-Origin", "*");
+//   res.setHeader("Access-Control-Allow-Credentials", "true");
+//   res.setHeader("Access-Control-Max-Age", "1800");
+//   res.setHeader("Access-Control-Allow-Headers", "content-type");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "PUT, POST, GET, DELETE, PATCH, OPTIONS"
+//   );
+//   res.sendFile(path.join(__dirname, "..", "public/index.html"));
+// });
 
 //Static file-serving middleware.
 app.use(express.static(path.join(__dirname, "..", "public")));

@@ -86,7 +86,6 @@ export function getProducts() {
   return async function (dispatch) {
     try {
       const { data } = await axios.get(`http://localhost:3001/api/products`);
-      console.log(data);
       dispatch(gotProducts(data));
     } catch (err) {
       console.error(err);
@@ -108,9 +107,10 @@ export function getProduct(productId) {
 export const productState = { allProducts: [], singleProduct: {} };
 
 //This is getting the state from the component, not the productState above.
-export const productReducer = (state = productState, action) => {
+export const productReducer = (state, action) => {
   switch (action.type) {
     case GOT_PRODUCT:
+      console.log(state);
       return { ...state, singleProduct: { ...action.product } };
     case GOT_PRODUCTS:
       return { ...state, allProducts: [...action.products] };
@@ -125,7 +125,20 @@ export const productReducer = (state = productState, action) => {
         },
       ];
     case DELETE_PRODUCT:
-      return state.filter((product) => product.id !== action.product.id);
+      console.log("State: ", state);
+      console.log("Action ", action);
+      console.log({
+        ...state,
+        allProducts: state.allProducts.filter(
+          (product) => product.id !== action.product.id
+        ),
+      });
+      return {
+        ...state,
+        allProducts: state.allProducts.filter(
+          (product) => product.id !== action.product.id
+        ),
+      };
     case EDIT_PRODUCT:
       return;
     default:

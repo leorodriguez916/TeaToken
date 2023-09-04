@@ -12,16 +12,17 @@ import {
   Heading,
   Select,
 } from "@chakra-ui/react";
-import { GOT_USER, userState } from "../reducers/userReducer";
+import { GOT_USER, userState } from "../../reducers/userReducer";
 import { useReducer, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { userReducer } from "../reducers/userReducer";
-import { buttonStyle } from "../Styles";
+import { userReducer } from "../../reducers/userReducer";
+import { buttonStyle, adminStyle } from "../../Styles";
 import axios from "axios";
 
 export default function SingleUser(auth = { id: 1, role: "none" }) {
   const [users, dispatch] = useReducer(userReducer, userState);
   const { id } = useParams();
+  const isAdmin = true;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -40,59 +41,56 @@ export default function SingleUser(auth = { id: 1, role: "none" }) {
   const user = users.singleUser;
 
   console.log(user);
+  console.log(auth);
 
-  const url = `../${user.imageSrc}`;
+  const url = `../../${user.imageSrc}`;
 
-  return user.id ? (
+  return user.id && isAdmin ? (
     <Center>
-      <HStack>
+      <HStack justify="center" wrap="wrap">
         <VStack pl="30px" m="20px">
-          <Image minW="200px" boxSize="200px" src={url} alt="tea image"></Image>
-
-          <HStack spacing="10px">
+          <Image
+            borderRadius="full"
+            minW="200px"
+            boxSize="200px"
+            src={url}
+            alt="user image"
+          ></Image>
+          <HStack pt="20px" spacing="10px">
             {" "}
-            <Text color="tea.green">Price:</Text> <Spacer />
-            <Text color="tea.matcha">{user.price}</Text> <Spacer />
-            {auth.id && auth.role === "admin" && (
-              <Button
-                onClick={() => deleteUser(user.id)}
-                m="10px"
-                colorScheme="red"
-                borderRadius="full"
-                size="xs"
-              >
-                x{" "}
-              </Button>
-            )}
+            <Text color="tea.green">ID#:</Text> <Spacer />
+            <Text color="tea.matcha">{user.id}</Text> <Spacer />
+            <Button onClick={() => deleteUser(user.id)} {...adminStyle()}>
+              Remove User{" "}
+            </Button>
           </HStack>
         </VStack>
-        <Spacer />
+
         <VStack align="left" pr="30px" m="20px">
-          <Heading size="lg" color="tea.brown">
-            {user.name}
+          <Heading size="lg" color="tea.matcha">
+            {user.username}
           </Heading>
-          <Text>{user.description}</Text>
+          <Text casing="capitalize" color="tea.brown">
+            Status: {user.role ? user.role : "Customer"}
+          </Text>{" "}
           <HStack>
-            <Select mt="10px" mr="10px" maxW="100px" placeholder="Qty">
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </Select>
-            <Button mt="10px" maxW="100px" {...buttonStyle()}>
-              Add to Cart
-            </Button>
+            <Text as="b" color="tea.green">
+              Email:
+            </Text>{" "}
+            <Spacer />
+            <Text color="tea.green">{user.email}</Text> <Spacer />
           </HStack>
         </VStack>
       </HStack>
     </Center>
   ) : (
-    "null"
+    <Text pt="50px" align="center" color="tea.dark">
+      Page not found. Return home.
+    </Text>
   );
 }
+
+/*
+{auth.id && auth.role === "admin" && (
+  )}
+*/

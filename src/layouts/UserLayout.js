@@ -20,14 +20,14 @@ export default function UserPage() {
   return (
     <div>
       <Center>
-        <HStack justify="center" ml="30px" mr="30px" wrap="wrap">
+        <HStack justify="center" mx="30px" mb="30px" wrap="wrap">
+          <NavLink to="/account">
+            <Button {...buttonStyle()}>Account Details </Button>
+          </NavLink>
           <NavLink to="orders">
             <Button w="100%" {...buttonStyle()}>
               Order History{" "}
             </Button>
-          </NavLink>
-          <NavLink to="details">
-            <Button {...buttonStyle()}>Account Details </Button>
           </NavLink>
           <NavLink to="payments">
             <Button w="100%" {...buttonStyle()}>

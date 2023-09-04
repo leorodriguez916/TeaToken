@@ -33,7 +33,7 @@ export default function Users() {
   return (
     <div>
       {isAdmin && (
-        <HStack justify="center" m="30px" wrap="wrap">
+        <HStack justify="center" mx="30px" wrap="wrap">
           {users.allUsers[0]
             ? users.allUsers.map((user) => (
                 <Box key={user.id} m="10px">
