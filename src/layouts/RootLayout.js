@@ -26,7 +26,7 @@ export default function RootLayout() {
   const navStyles = {
     ml: "40px",
     mr: "40px",
-    color: "tea.brown",
+    color: "tea.matcha",
     p: "10px",
     fontWeight: "bold",
   };
@@ -40,7 +40,13 @@ export default function RootLayout() {
 
   return (
     <div>
-      <MyGrid mb="0.5rem" pl="50px" pr="50px" border-bottom="1px solid black">
+      <MyGrid
+        mb="3rem"
+        p="20px"
+        borderBottom="1px dashed"
+        borderColor="tea.green"
+        bgColor="tea.green"
+      >
         <GridItem gridColumn="1 / -1" as={HStack} spacing="2rem" sx={navStyles}>
           <Heading textTransform={"lowercase"}>
             <NavLink to="/">TeaTokens</NavLink>
