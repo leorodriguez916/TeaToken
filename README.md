@@ -11,7 +11,7 @@
 
 If you've ever wanted to own your favorite teas in the form of an online image, Teatokens has the services you desire. This e-commerce website allows you to create an account and purchase images of tea to keep. Each one is uniquely your own in that you bought it, and there is a limited stock of each one. Buy your tea today and make it yours!
 
-\_</b> <img src="./public/images/screenshot1.png" alt="Logo" ><img src="./public/screenshotShop.png" alt="Shop Page" > </b> 
+\_</b> <img src="./public/screenshotShop.png" alt="Shop Page" > </b> 
 
 
 ## Deployed Site Teatokens:
