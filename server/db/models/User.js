@@ -29,6 +29,10 @@ const User = db.define("user", {
       },
     },
   },
+  token: {
+    type: Sequelize.STRING,
+    required: true,
+  },
   email: {
     type: Sequelize.STRING,
     allowNull: false,

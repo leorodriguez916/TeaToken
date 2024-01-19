@@ -20,6 +20,9 @@ app.use(express.json());
 //Route to API folder with CRUD operations.
 app.use("/api", require("./api"));
 
+//? dont need
+app.set("View Engine", "hbs");
+
 // app.get("/", (req, res) => {
 //   res.setHeader("Access-Control-Allow-Origin", "*");
 //   res.setHeader("Access-Control-Allow-Credentials", "true");

@@ -58,17 +58,18 @@ export default function RootLayout() {
           <NavLink to="/checkout">
             <Icon as={AiOutlineShoppingCart} w="7" h="7" />
           </NavLink>
-
-          <Button
-            minW="80px"
-            maxW="200px"
-            w="100%"
-            {...buttonStyle()}
-            color="tea.brown"
-            bgColor="tea.light.50"
-          >
-            Log In{" "}
-          </Button>
+          <NavLink to="/login">
+            <Button
+              minW="100px"
+              maxW="200px"
+              w="100%"
+              {...buttonStyle()}
+              color="tea.brown"
+              bgColor="tea.light.50"
+            >
+              Log In
+            </Button>
+          </NavLink>
         </GridItem>
       </MyGrid>
 

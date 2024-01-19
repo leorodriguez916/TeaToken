@@ -12,6 +12,7 @@ import {
 import { useContext } from "react";
 import RootLayout from "./layouts/RootLayout";
 import Home from "./components/Home";
+import Login from "./components/Login";
 import Checkout from "./components/Checkout";
 import UserLayout from "./layouts/UserLayout";
 import Products from "./components/Products";
@@ -31,6 +32,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
+      <Route path="login" element={<Login />} />
       <Route path="checkout" element={<Checkout />} />
       <Route path="products" element={<Products />} />
       <Route path="products/:id" element={<SingleProduct />} />
