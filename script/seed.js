@@ -53,6 +53,8 @@ async function seed() {
     Product.create({
       name: "Earl Grey Tea",
       price: 15.99,
+      type: "black",
+      caffeine: 40,
       imageSrc: "earlgrey.webp",
       description:
         "Straight outta Britain, this black tea has notes of lavender that will straight up put you to sleep.",
@@ -60,26 +62,133 @@ async function seed() {
     Product.create({
       name: "White Peach Tea",
       price: 18.99,
+      type: "white",
+      caffeine: 0,
       imageSrc: "whitepeach.webp",
       description: "Summertime vibes, if you like that then buy it.",
     }),
     Product.create({
       name: "Ginger Tea",
-      price: 18.99,
+      price: 10.99,
+      type: "herbal",
+      caffeine: 0,
       imageSrc: "ginger.webp",
       description: "So spicy! Not really, but, you know.",
     }),
     Product.create({
       name: "Mint Leaves",
-      price: 18.99,
+      price: 8.99,
+      type: "herbal",
+      caffeine: 0,
       imageSrc: "mintleaves.png",
       description:
         "Who doesn't love mint? You, if you don't add this to your cart.",
     }),
     Product.create({
-      name: "Black Rose Tea",
+      name: "Rose Hips",
       price: 18.99,
+      type: "herbal",
+      caffeine: 0,
       imageSrc: "blackrose.png",
+      description:
+        "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+    }),
+    Product.create({
+      name: "White Assam Tea",
+      price: 12.99,
+      type: "white",
+      caffeine: 0,
+      imageSrc: "whitepeach.webp",
+      description:
+        "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+    }),
+    Product.create({
+      name: "Hoji Cha Tea",
+      price: 18.49,
+      type: "green",
+      caffeine: 35,
+      imageSrc: "blackrose.png",
+      description:
+        "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+    }),
+    Product.create({
+      name: "Kukicha Kamakura Tea",
+      price: 21.99,
+      type: "green",
+      caffeine: 30,
+      imageSrc: "blackrose.png",
+      description:
+        "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+    }),
+    Product.create({
+      name: "Sencha Tea",
+      price: 15.99,
+      type: "green",
+      caffeine: 32,
+      imageSrc: "blackrose.png",
+      description:
+        "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+    }),
+    Product.create({
+      name: "Gen-mai Cha",
+      price: 18.99,
+      type: "green",
+      caffeine: 32,
+      imageSrc: "blackrose.png",
+      description:
+        "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+    }),
+    Product.create({
+      name: "Chamomile Tea",
+      price: 11.99,
+      type: "herbal",
+      caffeine: 0,
+      imageSrc: "blackrose.png",
+      description:
+        "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+    }),
+    Product.create({
+      name: "Irish Breakfast Tea",
+      price: 10.99,
+      type: "black",
+      caffeine: 70,
+      imageSrc: "blackrose.png",
+      description:
+        "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+    }),
+    Product.create({
+      name: "English Breakfast Tea",
+      price: 10.49,
+      type: "black",
+      caffeine: 90,
+      imageSrc: "blackrose.png",
+      description:
+        "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+    }),
+    Product.create({
+      name: "Apricot White Tea",
+      price: 14.99,
+      type: "white",
+      caffeine: 0,
+      imageSrc: "whitepeach.webp",
+      description:
+        "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+    }),
+    Product.create({
+      name: "Hibiscus Tea",
+      price: 8.99,
+      type: "herbal",
+      caffeine: 0,
+      imageSrc: "mintleaves.png",
+      description:
+        "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+    }),
+    Product.create({
+      name: "Chrysanthemum Tea",
+      price: 18.99,
+      type: "herbal",
+      caffeine: 0,
+      imageSrc: "ginger.webp",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
     }),

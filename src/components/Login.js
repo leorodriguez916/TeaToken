@@ -1,6 +1,7 @@
 import React from "react";
-import { Text, Center, VStack, Input, Box } from "@chakra-ui/react";
+import { Text, Center, VStack, Input, Box, Button } from "@chakra-ui/react";
 import { inputStyle, buttonStyle } from "../Styles";
+import { NavLink } from "react-router-dom";
 
 export default function Login() {
   const handleSubmit = () => {};
@@ -8,9 +9,22 @@ export default function Login() {
   return (
     <Center>
       <VStack>
-        <Text pb="10px" color="tea.green" cursor="pointer">
-          Don't have an account yet? Click here to sign up!
-        </Text>
+        <NavLink to="/signup">
+          <Button
+            minW="100px"
+            maxW="500px"
+            w="100%"
+            {...buttonStyle()}
+            color="tea.brown"
+            bgColor="tea.light.50"
+            cursor="pointer"
+          >
+            Don't have an account yet? Click here to sign up!
+          </Button>
+        </NavLink>
+        <NavLink to="/signup">
+          <Text pb="10px" color="tea.green" cursor="pointer"></Text>
+        </NavLink>
         <VStack
           as="form"
           onSubmit={handleSubmit}

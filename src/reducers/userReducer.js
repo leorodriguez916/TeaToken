@@ -20,7 +20,7 @@ export const userReducer = (state = userState, action) => {
     case EDIT_USER:
       return;
     case CREATE_USER:
-      return;
+      return { ...state };
     case DELETE_USER:
       return;
     default:

@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Product },
+  models: { User },
 } = require("../db");
 const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
@@ -24,10 +24,8 @@ router.use(cookieParser);
 //Get the sign up page.
 router.get("/", async (req, res, next) => {
   try {
-    const products = await Product.findAll({
-      attributes: ["id", "name", "price", "imageSrc", "description"],
-    });
-    res.json(products);
+    const users = await User.findAll({});
+    res.json(users);
   } catch (err) {
     next(err);
   }
@@ -35,20 +33,23 @@ router.get("/", async (req, res, next) => {
 
 router.post("/", async (req, res, next) => {
   try {
-    const check = await Product.findOne(
-      { name: req.body.name },
-      "uirfnicsendfujsehbfksnncfbhjdcskjfhudjksfjduhinfjksdmjueihfsjkciuhfjksu"
-    );
+    const check = await User.findOne({ name: req.body.name });
+
     if (check) {
       res.send("User already exists.");
     } else {
-      const token = jwt.sign({ name: req.body.name });
+      const token = jwt.sign(
+        { name: req.body.name },
+        "uirfnicsendfujsehbfksnncfbhjdcskjfhudjksfjduhinfjksdmjueihfsjkciuhfjksu"
+      );
 
       const data = {
         name: req.body.name,
-        password: req.body.password,
+        password: hashPass(req.body.password),
         token: token,
       };
+
+      const addUser = await User.create(data);
     }
   } catch (err) {
     res.send("Incorrect details entered.");

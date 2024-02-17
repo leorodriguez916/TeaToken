@@ -27,12 +27,14 @@ import CartContextProvider from "./contexts/cartContext";
 import AppContextProvider from "./contexts/GlobalState";
 import GlobalState from "./contexts/GlobalState";
 import SingleUser from "./components/account/SingleUser";
+import SignUp from "./components/SignUp";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<RootLayout />}>
       <Route index element={<Home />} />
       <Route path="login" element={<Login />} />
+      <Route path="signup" element={<SignUp />} />
       <Route path="checkout" element={<Checkout />} />
       <Route path="products" element={<Products />} />
       <Route path="products/:id" element={<SingleProduct />} />

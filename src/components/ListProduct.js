@@ -13,15 +13,16 @@ export default function ListProduct({
     <VStack
       maxW="350px"
       minW="325px"
-      m="10px"
       p="30px"
       backgroundColor="white"
       borderRadius="20px"
     >
       <Image boxSize="100px" src={product.imageSrc} alt="tea image"></Image>
       <Text color="tea.green">
-        <Link to={`/products/${product.id}`}>{product.name}</Link>
+        <Link to={`/products/${product.id}`}>{product.name}</Link>{" "}
       </Text>
+      <Text color="tea.dark">Caffeine: {product.caffeine}mg per cup</Text>
+
       <HStack spacing="10px">
         {" "}
         <Text color="tea.matcha" mr="5px">

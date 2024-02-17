@@ -17,6 +17,16 @@ const Product = db.define("product", {
       notEmpty: true,
     },
   },
+  type: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: { notEmpty: true },
+  },
+  caffeine: {
+    type: Sequelize.FLOAT,
+    allowNull: false,
+    validate: { notEmpty: true },
+  },
   imageSrc: {
     type: Sequelize.STRING,
     allowNull: false,

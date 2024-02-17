@@ -19,7 +19,7 @@ import { productReducer } from "../reducers/productReducer";
 import { buttonStyle } from "../Styles";
 import axios from "axios";
 
-export default function SingleProduct(auth = { id: 1, role: "none" }) {
+export default function SingleProduct({ auth = { id: 1, role: "admin" } }) {
   const [products, dispatch] = useReducer(productReducer, productState);
   const { id } = useParams();
 
