@@ -21,6 +21,7 @@ export default function ListProduct({
       <Text color="tea.green">
         <Link to={`/products/${product.id}`}>{product.name}</Link>{" "}
       </Text>
+      <Text color="tea.dark">Location: {product.location.name}</Text>
       <Text color="tea.dark">Caffeine: {product.caffeine}mg per cup</Text>
 
       <HStack spacing="10px">

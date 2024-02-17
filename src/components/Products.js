@@ -1,7 +1,6 @@
 import React, { useEffect, useContext, useState } from "react";
 import ListProduct from "./ListProduct";
 import { Center, Grid, GridItem, Select } from "@chakra-ui/react";
-import { CartContext } from "../contexts/cartContext";
 import { ProductContext } from "../contexts/productContext";
 import { DELETE_PRODUCT } from "../reducers/productReducer";
 import axios from "axios";
@@ -10,35 +9,41 @@ export default function Products() {
   const { products, dispatch, getProducts } = useContext(ProductContext);
   const [sort, setSort] = useState("alphabetical");
   const [filter, setFilter] = useState("all");
-  const [flow, setFlow] = useState("ascending");
+  const [userX, setUserX] = useState(null);
+  const [userY, setUserY] = useState(null);
 
   useEffect(() => {
     getProducts();
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(foundLocation, errors);
+    }
   }, []);
 
+  //Finds user's location when permitted and adds it to the state for the purpose of sorting by distance.
+  const foundLocation = (pos) => {
+    var crd = pos.coords;
+    if (!userX || !userY) {
+      setUserX(crd.latitude);
+      setUserY(crd.longitude);
+    }
+    console.log("Your current position is:");
+    console.log(`Latitude : ${crd.latitude}`);
+    console.log(`Longitude: ${crd.longitude}`);
+  };
+
+  function errors(err) {
+    console.warn(`ERROR(${err.code}): ${err.message}`);
+  }
+
+  //Watches the Select components for changes and updates the state upon change, re-rendering the product list.
   const handleFilterChange = (event) => {
     setFilter(event.target.value);
   };
-
   const handleSortChange = (event) => {
     if (event.target.value) setSort(event.target.value);
   };
 
-  const handleFlowChange = (event) => {
-    setFlow(event.target.value);
-  };
-
-  const deleteProduct = async (product) => {
-    try {
-      const { data } = await axios.delete(
-        `http://localhost:3001/api/products/${product.id}`
-      );
-      dispatch({ type: DELETE_PRODUCT, product: product });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
+  //Uses the "sort" variable in the state to determine the order in which products are sorted.
   const productSorter = (a, b) => {
     switch (sort) {
       case "alphabetical":
@@ -51,9 +56,32 @@ export default function Products() {
         return b.price - a.price;
       case "caffeine":
         return b.caffeine - a.caffeine;
+      case "distance":
+        var distA = Math.sqrt(
+          (userX - a.location.latitude) ** 2 +
+            (userY - a.location.longitude) ** 2
+        );
+        var distB = Math.sqrt(
+          (userX - b.location.latitude) ** 2 +
+            (userY - b.location.longitude) ** 2
+        );
+        return distA - distB;
     }
   };
 
+  //Deletes products in the database.
+  const deleteProduct = async (product) => {
+    try {
+      const { data } = await axios.delete(
+        `http://localhost:3001/api/products/${product.id}`
+      );
+      dispatch({ type: DELETE_PRODUCT, product: product });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  //Returns Select components in a Grid component followed by products filtered and sorted.
   return products ? (
     <div>
       <Grid
@@ -87,10 +115,10 @@ export default function Products() {
             <option value="priceLtH">Price: Low to High</option>
             <option value="priceHtL">Price: High to Low</option>
             <option value="caffeine">Most caffeine (mg / cup)</option>
+            <option value="distance">Closest to you</option>
           </Select>
         </GridItem>
       </Grid>
-
       <Grid
         minW="375px"
         mb="20px"
@@ -110,7 +138,6 @@ export default function Products() {
                   <ListProduct
                     key={product.id}
                     product={product}
-                    type={product.type}
                     deleteProduct={deleteProduct}
                   />
                 </Center>
@@ -120,26 +147,3 @@ export default function Products() {
     </div>
   ) : null;
 }
-
-// {this.props.products
-//   .filter((product) => {
-//     if (!this.state.search.trim()) return true;
-//     return product.name.toLowerCase();
-//   })
-//   .map((product) => {
-//     return <ProductItem key={product.id} product={product} />;
-//   })}
-
-// useEffect(() => {
-//   const fetchData = async () => {
-//     try {
-//       const { data } = await axios.get(`http://localhost:3001/api/products`);
-//       dispatch({ type: GOT_PRODUCTS, products: data });
-//     } catch (err) {
-//       console.log(err);
-//     }
-//   };
-//   fetchData();
-// }, []);
-
-// const [products, dispatch] = useReducer(productReducer, {});

@@ -58,6 +58,7 @@ async function seed() {
       imageSrc: "earlgrey.webp",
       description:
         "Straight outta Britain, this black tea has notes of lavender that will straight up put you to sleep.",
+      location: { name: "United Kingdom", latitude: 55, longitude: -3 },
     }),
     Product.create({
       name: "White Peach Tea",
@@ -66,6 +67,7 @@ async function seed() {
       caffeine: 0,
       imageSrc: "whitepeach.webp",
       description: "Summertime vibes, if you like that then buy it.",
+      location: { name: "Georgia, US", latitude: 33, longitude: -83 },
     }),
     Product.create({
       name: "Ginger Tea",
@@ -74,6 +76,7 @@ async function seed() {
       caffeine: 0,
       imageSrc: "ginger.webp",
       description: "So spicy! Not really, but, you know.",
+      location: { name: "Nepal", latitude: 28, longitude: 84 },
     }),
     Product.create({
       name: "Mint Leaves",
@@ -83,6 +86,7 @@ async function seed() {
       imageSrc: "mintleaves.png",
       description:
         "Who doesn't love mint? You, if you don't add this to your cart.",
+      location: { name: "California, US", latitude: 36, longitude: -119 },
     }),
     Product.create({
       name: "Rose Hips",
@@ -92,6 +96,7 @@ async function seed() {
       imageSrc: "blackrose.png",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "Nebraska, US", latitude: 41, longitude: -99 },
     }),
     Product.create({
       name: "White Assam Tea",
@@ -101,69 +106,77 @@ async function seed() {
       imageSrc: "whitepeach.webp",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "India", latitude: 21, longitude: 82 },
     }),
     Product.create({
       name: "Hoji Cha Tea",
       price: 18.49,
       type: "green",
       caffeine: 35,
-      imageSrc: "blackrose.png",
+      imageSrc: "hojicha.webp",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "Japan", latitude: 37, longitude: 136 },
     }),
     Product.create({
       name: "Kukicha Kamakura Tea",
       price: 21.99,
       type: "green",
       caffeine: 30,
-      imageSrc: "blackrose.png",
+      imageSrc: "sencha.png",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "Japan", latitude: 37, longitude: 136 },
     }),
     Product.create({
       name: "Sencha Tea",
       price: 15.99,
       type: "green",
       caffeine: 32,
-      imageSrc: "blackrose.png",
+      imageSrc: "sencha.png",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "Japan", latitude: 37, longitude: 136 },
     }),
     Product.create({
       name: "Gen-mai Cha",
       price: 18.99,
       type: "green",
       caffeine: 32,
-      imageSrc: "blackrose.png",
+      imageSrc: "sencha.png",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "Japan", latitude: 37, longitude: 136 },
     }),
     Product.create({
       name: "Chamomile Tea",
       price: 11.99,
       type: "herbal",
       caffeine: 0,
-      imageSrc: "blackrose.png",
+      imageSrc: "chrystanthemum.webp",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "India", latitude: 21, longitude: 82 },
     }),
     Product.create({
       name: "Irish Breakfast Tea",
       price: 10.99,
       type: "black",
       caffeine: 70,
-      imageSrc: "blackrose.png",
+      imageSrc: "earlgrey.webp",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "Ireland", latitude: 53, longitude: -8 },
     }),
     Product.create({
       name: "English Breakfast Tea",
       price: 10.49,
       type: "black",
       caffeine: 90,
-      imageSrc: "blackrose.png",
+      imageSrc: "engbk.webp",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "United Kingdom", latitude: 55, longitude: -3 },
     }),
     Product.create({
       name: "Apricot White Tea",
@@ -173,24 +186,27 @@ async function seed() {
       imageSrc: "whitepeach.webp",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "Turkey", latitude: 38, longitude: 35 },
     }),
     Product.create({
       name: "Hibiscus Tea",
       price: 8.99,
       type: "herbal",
       caffeine: 0,
-      imageSrc: "mintleaves.png",
+      imageSrc: "blackrose.png",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "Japan", latitude: 37, longitude: 136 },
     }),
     Product.create({
       name: "Chrysanthemum Tea",
       price: 18.99,
       type: "herbal",
       caffeine: 0,
-      imageSrc: "ginger.webp",
+      imageSrc: "chrystanthemum.webp",
       description:
         "Sweet and floral with a little edge to it. It's in your area, you might as well.",
+      location: { name: "Japan", latitude: 37, longitude: 136 },
     }),
   ]);
 

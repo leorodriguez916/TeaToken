@@ -35,6 +35,11 @@ const Product = db.define("product", {
   description: {
     type: Sequelize.STRING,
   },
+  location: {
+    type: Sequelize.DataTypes.JSON,
+    allowNull: false,
+    defaultValue: {},
+  },
 });
 
 module.exports = Product;
