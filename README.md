@@ -6,12 +6,12 @@
   <a href="">
   </a>
   <p align="center">
-   Teatokens is an online tea shop that sells pictures of your favorite tea!
+   Teatokens is an online tea shop that sells your favorite tea from all over the world!
     <br />
 
-If you've ever wanted to own your favorite teas in the form of an online image, Teatokens has the services you desire. This e-commerce website allows you to create an account and purchase images of tea to keep. Each one is uniquely your own in that you bought it, and there is a limited stock of each one. Buy your tea today and make it yours!
+If you've ever wanted to get your favorite teas as locally as possible, Teatokens has the services you desire. This e-commerce website allows you to create an account and purchase tea. Buy your favorite teas and those that are closest to you to cut back on the environmental costs of importing and exporting goods. We're working hard to expand our stock and bring you more options. For each purchase, you'll earn tokens you can exchange for more tea or even a ticket to one of our production sites around the world!
 
-\_</b> <img src="./public/screenshotShop.png" alt="Shop Page" > </b> 
+\_</b> <img src="./public/shopPage1.png" alt="Shop Page 1" > <img src="./public/shopPage2.png" alt="Shop Page 2" >  </b> 
 
 
 ## Deployed Site Teatokens:
