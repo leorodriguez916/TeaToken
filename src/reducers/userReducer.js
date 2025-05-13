@@ -1,3 +1,5 @@
+import axios from "axios";
+
 //Action constants.
 export const GOT_USER = "GOT_USER";
 export const GOT_USERS = "GOT_USERS";
@@ -19,16 +21,44 @@ function _deleteUser(id) {
   };
 }
 
-export function createUser(user) {
-  return async function (dispatch) {
-    try {
-      const { data } = await axios.post("http://localhost:3001/api/signup");
-      dispatch(_createUser(data));
-    } catch (err) {
-      console.error(err);
-    }
-  };
-}
+// export function createUser(user) {
+//   return async function (dispatch) {
+//     try {
+//       const { data } = await axios.post("http://localhost:3001/api/signup");
+//       dispatch(_createUser(data));
+//     } catch (err) {
+//       console.error(err);
+//     }
+//   };
+// }
+
+export const createUser = async (user, dispatch) => {
+  console.log("Calling createUser with:", user);
+
+  try {
+    const { data } = await axios.post("http://localhost:3001/api/signup", {
+      name: user.username,
+      password: user.password,
+      passwordConfirm: user.passwordConfirm,
+      token: null,
+      email: user.email,
+      role: user.role,
+    });
+    console.log("Received response:", data);
+
+    dispatch(_createUser(data));
+    return { success: true, message: "New user created!" };
+  } catch (err) {
+    console.error("createUser error:", err.response?.data || err.message);
+
+    return {
+      success: false,
+      message: err.response?.data,
+      // err.response?.data?.error ||
+      // "Something went wrong creating your account.",
+    };
+  }
+};
 
 // In code block above after URL
 // user, {

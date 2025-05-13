@@ -1,7 +1,14 @@
+const bcryptjs = require("bcryptjs");
+
 const {
   db,
   models: { User, Order, Product },
 } = require("../server/db");
+
+async function hashPass(password) {
+  const result = await bcryptjs.hash(password, 8);
+  return result;
+}
 
 async function seed() {
   await db.sync({ force: true });
@@ -9,42 +16,40 @@ async function seed() {
   //Example user data.
   const users = await Promise.all([
     User.create({
-      username: "leorodriguez",
-      password: "hardtoguess123",
-      passwordConfirm: "hardtoguess123",
+      username: "leo",
+      password: await hashPass("qwkp"),
       email: "leorodriguez916@gmail.com",
       role: "admin",
     }),
     User.create({
-      username: "vidafeng",
-      password: "hardtoguess123",
-      passwordConfirm: "hardtoguess123",
+      username: "vida",
+      password: await hashPass("hardtoguess123"),
       email: "vida@gmail.com",
       role: "admin",
     }),
     User.create({
       username: "maddd4tea5",
-      password: "ilovetea",
-      passwordConfirm: "ilovetea",
+      password: await hashPass("ilovetea"),
       email: "nowbrewing456@yahoo.com",
+      role: "customer",
     }),
     User.create({
       username: "teafiend",
-      password: "givemeteanwo",
-      passwordConfirm: "givemeteanwo",
+      password: await hashPass("givemeteanwo"),
       email: "janedoe@gmail.com",
+      role: "customer",
     }),
     User.create({
       username: "elmroastery",
-      password: "mxmanager",
-      passwordConfirm: "mxmanager",
+      password: await hashPass("mxmanager"),
       email: "elmroastery@gmail.com",
+      role: "customer",
     }),
     User.create({
       username: "starbucks",
-      password: "secretrecipe",
-      passwordConfirm: "secretrecipe",
+      password: await hashPass("secretrecipe"),
       email: "kevin.johnson@starbucks.com",
+      role: "customer",
     }),
   ]);
 

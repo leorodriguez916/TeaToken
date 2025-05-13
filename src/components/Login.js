@@ -20,7 +20,7 @@ export default function Login() {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  //we dont use this bc it createes a new state instead of using the global context
+  //Learning note: We dont use this bc it createes a new state instead of using the global context
   //const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -29,13 +29,6 @@ export default function Login() {
       navigate("/account");
     }
   }, []);
-
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("token"); // or actual user data
-  //   if (storedUser) {
-  //     setUser(storedUser);
-  //   }
-  // }, []);
 
   const onSubmit = async (values) => {
     console.log(values);

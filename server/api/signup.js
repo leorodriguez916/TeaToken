@@ -6,8 +6,6 @@ const jwt = require("jsonwebtoken");
 const cookieParser = require("cookie-parser");
 const bcryptjs = require("bcryptjs");
 
-console.log("Signup router loaded.");
-
 async function hashPass(password) {
   const result = await bcryptjs.hash(password, 8);
   return result;
@@ -17,6 +15,8 @@ async function compare(userPassword, hashPassword) {
   const result = await bcryptjs.compare(userPassword, hashPassword);
   return result;
 }
+
+console.log("Signup router loaded.");
 
 //GET @ /api/signup
 //Get the sign up page.
@@ -39,10 +39,24 @@ router.get("/ping", (req, res) => {
 router.post("/", async (req, res, next) => {
   console.log("Creating a user.");
   try {
-    const check = await User.findOne({ where: { username: req.body.name } });
+    const nameCheck = await User.findOne({
+      where: { username: req.body.name },
+    });
+    console.log("Name taken: ", nameCheck);
+    const emailCheck = await User.findOne({
+      where: { email: req.body.email },
+    });
 
-    if (check) {
-      return res.status(409).send("User already exists.");
+    if (nameCheck) {
+      return res
+        .status(409)
+        .send("That username is already taken. Please try again!");
+    }
+    console.log("Email taken: ", emailCheck);
+    if (emailCheck) {
+      return res
+        .status(409)
+        .send("That email is already taken. Please try again!");
     }
 
     const hashedPassword = await hashPass(req.body.password);
@@ -53,7 +67,6 @@ router.post("/", async (req, res, next) => {
       username: req.body.name,
       email: req.body.email,
       password: hashedPassword,
-      token: token,
       role: req.body.role || "customer",
     });
 
