@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { VStack, Image, Text, HStack, Button } from "@chakra-ui/react";
 import { buttonStyle, adminStyle } from "../Styles";
+import { useAuth } from "../contexts/authContext";
 
 export default function ListProduct({
   product,
@@ -9,6 +10,8 @@ export default function ListProduct({
   auth = { id: 1, role: "admin" },
   view = false,
 }) {
+  const { me } = useAuth();
+
   return product ? (
     <VStack
       maxW="350px"
@@ -30,7 +33,7 @@ export default function ListProduct({
           {product.price}
         </Text>
         <Button {...buttonStyle()}>Add</Button>
-        {auth.id && auth.role === "admin" && (
+        {me && me.role === "admin" ? (
           <Button
             onClick={() => deleteProduct(product)}
             m="10px"
@@ -38,7 +41,7 @@ export default function ListProduct({
           >
             x{" "}
           </Button>
-        )}
+        ) : null}
       </HStack>
     </VStack>
   ) : null;

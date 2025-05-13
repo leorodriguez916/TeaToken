@@ -6,16 +6,8 @@ import MyGrid from "../components/UI/MyGrid";
 import { useAuth } from "../contexts/authContext";
 
 export default function UserPage() {
-  const isAdmin = true;
-
-  const { setUser } = useAuth();
-
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("token"); // or actual user data
-  //   if (storedUser) {
-  //     setUser(storedUser);
-  //   }
-  // }, []);
+  const { me, setMe, loading } = useAuth();
+  let isAdmin = me ? me.role === "admin" : false;
 
   return (
     <div>
@@ -38,7 +30,7 @@ export default function UserPage() {
             <Button
               onClick={() => {
                 localStorage.removeItem("token");
-                setUser(null);
+                setMe(null);
               }}
               w="100%"
               {...buttonStyle()}

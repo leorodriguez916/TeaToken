@@ -12,5 +12,9 @@ const Order = db.define("order", {
       min: 0.01,
     },
   },
+  status: {
+    type: Sequelize.STRING,
+    defaultValue: "pending",
+  },
 });
 module.exports = Order;

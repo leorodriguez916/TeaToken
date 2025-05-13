@@ -1,26 +1,27 @@
 const Sequelize = require("sequelize");
 const db = require("../db");
 
-const ProductInCart = db.define("product_in_cart", {
+const OrderItem = db.define("product_in_cart", {
   id: {
     type: Sequelize.INTEGER,
     primaryKey: true,
     autoIncrement: true,
     allowNull: false,
   },
-  numItems: {
+  quantity: {
     type: Sequelize.INTEGER,
     validate: {
       min: 1,
     },
   },
-  totalPriceForProduct: {
+  productPrice: {
     type: Sequelize.FLOAT,
     defaultValue: 0,
     validate: {
       min: 0,
     },
   },
+  totalPrice: productPrice ** quantity,
 });
 
-module.exports = ProductInCart;
+module.exports = OrderItem;

@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useReducer } from "react";
+import { useAuth } from "../../contexts/authContext";
 import { Link } from "react-router-dom";
 import {
   Box,
@@ -45,7 +46,8 @@ export default function ListUser({
     };
   }
 
-  let isAdmin = true;
+  const { me, loading } = useAuth();
+  let isAdmin = me ? me.role === "admin" : false;
 
   return isAdmin ? (
     <VStack

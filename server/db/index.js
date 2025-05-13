@@ -4,23 +4,22 @@ const db = require("./db");
 const Product = require("./models/Product");
 const Order = require("./models/Order");
 const User = require("./models/User");
-const ProductInCart = require("./models/ProductInCart");
+const OrderItem = require("./models/OrderItem");
 
 //Associations
-User.hasMany(Order);
-Order.belongsTo(User);
+User.hasMany(Order); //These kinds of associations give a foreign key to Order.
+Order.belongsTo(User, { foreignKey: "userId" });
 
-Order.belongsToMany(Product, { through: ProductInCart });
-Product.belongsToMany(Order, { through: ProductInCart });
+Product.hasMany(OrderItem);
+OrderItem.belongsTo(Product);
 
-Product.hasMany(ProductInCart);
-ProductInCart.belongsTo(Product);
+Order.hasMany(OrderItem);
+OrderItem.belongsTo(Order);
 
-Order.hasMany(ProductInCart);
-ProductInCart.belongsTo(Order);
+Order.belongsToMany(Product, { through: OrderItem });
+Product.belongsToMany(Order, { through: OrderItem });
 
-User.hasMany(ProductInCart);
-ProductInCart.belongsTo(User);
+OrderItem.belongsTo(User);
 
 module.exports = {
   db,
@@ -28,6 +27,6 @@ module.exports = {
     User,
     Product,
     Order,
-    ProductInCart,
+    OrderItem,
   },
 };

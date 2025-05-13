@@ -5,14 +5,13 @@ import { NavLink } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/authContext";
-
+import { userState, loginUser, userReducer } from "../reducers/userReducer";
 import axios from "axios";
 
 export default function Login() {
+  const { setMe } = useAuth();
+  const [users, dispatch] = useReducer(userReducer, userState);
   const navigate = useNavigate();
-
-  const { setUser } = useAuth();
-
   const {
     handleSubmit,
     register,
@@ -31,25 +30,17 @@ export default function Login() {
   }, []);
 
   const onSubmit = async (values) => {
-    console.log(values);
-    try {
-      const { data } = await axios.post("http://localhost:3001/api/login", {
-        username: values.username,
-        password: values.password,
-      });
-      console.log("Login success:", data);
-      // Optional: save token
-      localStorage.setItem("token", data.token);
-      setUser(data.user);
-      console.log("Here's the user");
-      // Redirect or set user in context/state
+    console.log("Submitting login form with values:", values);
+
+    const result = await loginUser(values, dispatch);
+    if (result.success) {
+      localStorage.setItem("token", result.token);
+      setMe(result.user);
+      alert(result.message);
       navigate("/account");
-      reset();
-    } catch (err) {
-      console.error("Login error:", err.response?.data || err.message);
-      alert(
-        "Login failed: " + (err.response?.data?.error || "Unexpected error")
-      );
+    } else {
+      console.log(result);
+      alert(result.message.error);
     }
   };
 
@@ -102,6 +93,7 @@ export default function Login() {
           <Input
             name="password"
             type="password"
+            autoComplete="on"
             placeholder="Password"
             {...inputStyle}
             {...register("password", {

@@ -18,9 +18,8 @@ import {
   userState,
 } from "../reducers/userReducer";
 import { UserContext } from "../contexts/userContext";
-//import User from "../../server/db/models/User";
 import { useReducer, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { userReducer } from "../reducers/userReducer";
 import { useForm } from "react-hook-form";
 import axios from "axios";
@@ -28,13 +27,14 @@ import axios from "axios";
 export default function SignUp() {
   const [users, dispatch] = useReducer(userReducer, userState);
   const { id } = useParams();
+  const navigate = useNavigate();
+
   const {
     handleSubmit,
     register,
     reset,
     formState: { errors, isSubmitting },
   } = useForm();
-  const isAdmin = true;
 
   const onSubmit = async (values) => {
     console.log("Submitting form with values:", values);
@@ -48,6 +48,7 @@ export default function SignUp() {
       alert(result.message);
     } else {
       alert(result.message);
+      navigate("/login");
       reset();
     }
 
@@ -108,6 +109,7 @@ export default function SignUp() {
           />
           <Input
             type="password"
+            autoComplete="off"
             mb="10px"
             id="password"
             placeholder="Password"
@@ -119,6 +121,7 @@ export default function SignUp() {
           />
           <Input
             type="password"
+            autoComplete="off"
             mb="10px"
             id="passwordConfirm"
             placeholder="Confirm Password"

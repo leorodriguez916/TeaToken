@@ -19,36 +19,56 @@ async function seed() {
       username: "leo",
       password: await hashPass("qwkp"),
       email: "leorodriguez916@gmail.com",
+      points: 100000,
       role: "admin",
     }),
     User.create({
       username: "vida",
       password: await hashPass("hardtoguess123"),
       email: "vida@gmail.com",
+      points: 100000,
       role: "admin",
     }),
     User.create({
       username: "maddd4tea5",
       password: await hashPass("ilovetea"),
       email: "nowbrewing456@yahoo.com",
+      points: 200,
       role: "customer",
     }),
     User.create({
       username: "teafiend",
       password: await hashPass("givemeteanwo"),
       email: "janedoe@gmail.com",
+      points: 200,
       role: "customer",
     }),
     User.create({
       username: "elmroastery",
       password: await hashPass("mxmanager"),
       email: "elmroastery@gmail.com",
+      points: 2000,
       role: "customer",
     }),
     User.create({
       username: "starbucks",
       password: await hashPass("secretrecipe"),
       email: "kevin.johnson@starbucks.com",
+      points: 40000,
+      role: "customer",
+    }),
+    User.create({
+      username: "liam",
+      password: await hashPass("dynamo"),
+      email: "liam@eirishexports.com",
+      points: 6000,
+      role: "customer",
+    }),
+    User.create({
+      username: "ericaray",
+      password: await hashPass("dynamo"),
+      email: "erica7555@gmail.com",
+      points: 300,
       role: "customer",
     }),
   ]);
@@ -57,7 +77,7 @@ async function seed() {
   const products = await Promise.all([
     Product.create({
       name: "Earl Grey Tea",
-      price: 15.99,
+      price: 160,
       type: "black",
       caffeine: 40,
       imageSrc: "earlgrey.webp",
@@ -67,7 +87,7 @@ async function seed() {
     }),
     Product.create({
       name: "White Peach Tea",
-      price: 18.99,
+      price: 190,
       type: "white",
       caffeine: 0,
       imageSrc: "whitepeach.webp",
@@ -76,7 +96,7 @@ async function seed() {
     }),
     Product.create({
       name: "Ginger Tea",
-      price: 10.99,
+      price: 110,
       type: "herbal",
       caffeine: 0,
       imageSrc: "ginger.webp",
@@ -85,7 +105,7 @@ async function seed() {
     }),
     Product.create({
       name: "Mint Leaves",
-      price: 8.99,
+      price: 90,
       type: "herbal",
       caffeine: 0,
       imageSrc: "mintleaves.png",
@@ -95,7 +115,7 @@ async function seed() {
     }),
     Product.create({
       name: "Rose Hips",
-      price: 18.99,
+      price: 190,
       type: "herbal",
       caffeine: 0,
       imageSrc: "blackrose.png",
@@ -105,7 +125,7 @@ async function seed() {
     }),
     Product.create({
       name: "White Assam Tea",
-      price: 12.99,
+      price: 130,
       type: "white",
       caffeine: 0,
       imageSrc: "whitepeach.webp",
@@ -115,7 +135,7 @@ async function seed() {
     }),
     Product.create({
       name: "Hoji Cha Tea",
-      price: 18.49,
+      price: 450,
       type: "green",
       caffeine: 35,
       imageSrc: "hojicha.webp",
@@ -125,7 +145,7 @@ async function seed() {
     }),
     Product.create({
       name: "Kukicha Kamakura Tea",
-      price: 21.99,
+      price: 850,
       type: "green",
       caffeine: 30,
       imageSrc: "sencha.png",
@@ -135,7 +155,7 @@ async function seed() {
     }),
     Product.create({
       name: "Sencha Tea",
-      price: 15.99,
+      price: 160,
       type: "green",
       caffeine: 32,
       imageSrc: "sencha.png",
@@ -145,7 +165,7 @@ async function seed() {
     }),
     Product.create({
       name: "Gen-mai Cha",
-      price: 18.99,
+      price: 320,
       type: "green",
       caffeine: 32,
       imageSrc: "sencha.png",
@@ -155,7 +175,7 @@ async function seed() {
     }),
     Product.create({
       name: "Chamomile Tea",
-      price: 11.99,
+      price: 120,
       type: "herbal",
       caffeine: 0,
       imageSrc: "chrystanthemum.webp",
@@ -165,7 +185,7 @@ async function seed() {
     }),
     Product.create({
       name: "Irish Breakfast Tea",
-      price: 10.99,
+      price: 110,
       type: "black",
       caffeine: 70,
       imageSrc: "earlgrey.webp",
@@ -175,7 +195,7 @@ async function seed() {
     }),
     Product.create({
       name: "English Breakfast Tea",
-      price: 10.49,
+      price: 30,
       type: "black",
       caffeine: 90,
       imageSrc: "engbk.webp",
@@ -185,7 +205,7 @@ async function seed() {
     }),
     Product.create({
       name: "Apricot White Tea",
-      price: 14.99,
+      price: 80,
       type: "white",
       caffeine: 0,
       imageSrc: "whitepeach.webp",
@@ -195,7 +215,7 @@ async function seed() {
     }),
     Product.create({
       name: "Hibiscus Tea",
-      price: 8.99,
+      price: 100,
       type: "herbal",
       caffeine: 0,
       imageSrc: "blackrose.png",
@@ -205,7 +225,7 @@ async function seed() {
     }),
     Product.create({
       name: "Chrysanthemum Tea",
-      price: 18.99,
+      price: 140,
       type: "herbal",
       caffeine: 0,
       imageSrc: "chrystanthemum.webp",

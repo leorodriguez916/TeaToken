@@ -22,7 +22,8 @@ import axios from "axios";
 export default function SingleUser(auth = { id: 1, role: "none" }) {
   const [users, dispatch] = useReducer(userReducer, userState);
   const { id } = useParams();
-  const isAdmin = true;
+  const { me, loading } = useAuth();
+  let isAdmin = me ? me.role === "admin" : false;
 
   useEffect(() => {
     const fetchData = async () => {

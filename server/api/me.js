@@ -22,7 +22,7 @@ function authenticateToken(req, res, next) {
 
 router.get("/", authenticateToken, async (req, res) => {
   const user = await User.findByPk(req.user.id, {
-    attributes: ["id", "username", "email", "role"],
+    attributes: ["id", "username", "email", "points", "role"],
   });
   res.json(user);
 });

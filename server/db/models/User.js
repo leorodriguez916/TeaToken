@@ -28,6 +28,10 @@ const User = db.define("user", {
       isEmail: true,
     },
   },
+  points: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
   imageSrc: {
     type: Sequelize.STRING,
     defaultValue: "user.jpeg",

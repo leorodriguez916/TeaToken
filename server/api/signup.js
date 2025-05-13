@@ -67,6 +67,7 @@ router.post("/", async (req, res, next) => {
       username: req.body.name,
       email: req.body.email,
       password: hashedPassword,
+      points: 200,
       role: req.body.role || "customer",
     });
 

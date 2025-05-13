@@ -4,13 +4,12 @@ import axios from "axios";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [user, setUser] = useState(null);
+  const [me, setMe] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log("Checking for a token in auth.");
     const token = localStorage.getItem("token");
-    console.log(token);
+    console.log("Checking for a token in authenticator:", token);
 
     if (!token) {
       setLoading(false);
@@ -21,11 +20,11 @@ export const AuthProvider = ({ children }) => {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => {
-          setUser(res.data); // full user object
+          setMe(res.data);
         })
         .catch((err) => {
           console.error("Error fetching /api/me:", err);
-          setUser(null); // token invalid or expired
+          setMe(null);
         })
         .finally(() => {
           setLoading(false);
@@ -33,15 +32,8 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   const token = localStorage.getItem("token");
-  //   if (token) {
-  //     setUser(token);
-  //   }
-  // }, []);
-
   return (
-    <AuthContext.Provider value={{ user, setUser }}>
+    <AuthContext.Provider value={{ me, setMe }}>
       {children}
     </AuthContext.Provider>
   );

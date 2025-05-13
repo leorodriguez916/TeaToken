@@ -8,6 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { userReducer, userState, GOT_USERS } from "../../reducers/userReducer";
 import { useReducer, useEffect } from "react";
+import { useAuth } from "../../contexts/authContext";
 import axios from "axios";
 import ListUser from "./ListUser";
 
@@ -26,7 +27,8 @@ export default function Users() {
     fetchData();
   }, []);
 
-  let isAdmin = true;
+  const { me, loading } = useAuth();
+  let isAdmin = me ? me.role === "admin" : false;
   let userList = users.allUsers;
   console.log(userList);
 

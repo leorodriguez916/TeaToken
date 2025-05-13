@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const {
-  models: { Order, Product, ProductInCart },
+  models: { Order, OrderItem, Product },
 } = require("../db");
 module.exports = router;
 
@@ -52,7 +52,7 @@ router.get("/", async (req, res, next) => {
 //Access all orders in a user's cart.
 router.get("/cart", async (req, res, next) => {
   try {
-    const cart = await ProductInCart.findAll({
+    const cart = await OrderItem.findAll({
       where: { userId: req.user.id, inCart: true },
       include: [{ model: Product }, { model: Order, where: { isCart: true } }],
     });
@@ -66,7 +66,7 @@ router.get("/cart", async (req, res, next) => {
 //Update the user's cart.
 router.put("/cart/:id", async (req, res, next) => {
   try {
-    const [_, editCart] = await ProductInCart.update(
+    const [_, editCart] = await OrderItem.update(
       {
         numItems: req.body.numItems,
         totalPrice: req.body.totalPrice,

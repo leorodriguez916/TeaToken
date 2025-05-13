@@ -37,18 +37,9 @@ export default function RootLayout() {
     return;
   };
 
-  let isAdmin = true;
-
-  const { user, loading } = useAuth();
-
-  console.log(user);
-
-  // useEffect(() => {
-  //   const storedUser = localStorage.getItem("token"); // or actual user data
-  //   if (storedUser) {
-  //     setUser(storedUser);
-  //   }
-  // }, []);
+  const { me, loading } = useAuth();
+  console.log(`Current user logged in via root layout:`, me);
+  let isAdmin = me ? me.role === "admin" : false;
 
   if (loading) return null;
 
@@ -69,7 +60,7 @@ export default function RootLayout() {
           <NavLink to="/checkout">
             <Icon as={AiOutlineShoppingCart} w="7" h="7" />
           </NavLink>
-          {!user ? (
+          {!me ? (
             <NavLink to="/login">
               <Button
                 minW="100px"
@@ -84,23 +75,16 @@ export default function RootLayout() {
             </NavLink>
           ) : (
             <NavLink to="/account">
-              <Icon as={AiOutlineSmile} w="7" h="7" />
-            </NavLink>
-          )}
-          {user ? (
-            <NavLink to="/account">
               <Button
-                minW="100px"
-                maxW="200px"
                 w="100%"
                 {...buttonStyle()}
                 color="tea.brown"
                 bgColor="tea.light.50"
               >
-                Welcome, {user.username}
+                Welcome, {me.username}! | PT: {me.points}
               </Button>
             </NavLink>
-          ) : null}
+          )}
         </GridItem>
       </MyGrid>
 

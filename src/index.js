@@ -33,7 +33,7 @@ const teaTheme = extendTheme({
   ...globalStyles,
   fonts: {
     heading: "Source Code Pro, monospace",
-    body: "Roboto, sans-serif",
+    body: "Source Code Pro, sans-serif",
   },
 });
 
