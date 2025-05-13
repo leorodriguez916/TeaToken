@@ -1,3 +1,5 @@
+import "@fontsource/source-code-pro";
+import "@fontsource/roboto";
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
@@ -30,8 +32,8 @@ const teaTheme = extendTheme({
   colors,
   ...globalStyles,
   fonts: {
-    heading: "Cormorant Garamond, sans-serif",
-    body: "Avenir, sans-serif",
+    heading: "Source Code Pro, monospace",
+    body: "Roboto, sans-serif",
   },
 });
 
