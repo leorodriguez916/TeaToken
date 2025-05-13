@@ -42,8 +42,8 @@ async function seed() {
     }),
     User.create({
       username: "starbucks",
-      password: "yoonyunbusta",
-      passwordConfirm: "yoonyunbusta",
+      password: "secretrecipe",
+      passwordConfirm: "secretrecipe",
       email: "kevin.johnson@starbucks.com",
     }),
   ]);
@@ -239,20 +239,20 @@ async function seed() {
     return Object.values(idxAdded);
   };
 
-  for (let i = 0; i < orders.length; i++) {
-    const randProducts = giveMeRandomProducts();
-    for (let j = 0; j < randProducts.length; j++) {
-      await users[i].addOrder(orders[i]);
-      await orders[i].addProduct(randProducts[j], {
-        through: {
-          numItems: 1,
-          totalPrice: randProducts[j].price,
-          imageSrc: "",
-          userId: users[i].id,
-        },
-      });
-    }
-  }
+  // for (let i = 0; i < orders.length; i++) {
+  //   const randProducts = giveMeRandomProducts();
+  //   for (let j = 0; j < randProducts.length; j++) {
+  //     await users[i].addOrder(orders[i]);
+  //     await orders[i].addProduct(randProducts[j], {
+  //       through: {
+  //         numItems: 1,
+  //         totalPrice: randProducts[j].price,
+  //         imageSrc: "",
+  //         userId: users[i].id,
+  //       },
+  //     });
+  //   }
+  // }
 
   console.log(`seeded ${users.length} users`);
   console.log(`seeded successfully`);

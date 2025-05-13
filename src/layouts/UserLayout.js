@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { Button, HStack, Center } from "@chakra-ui/react";
 import { Outlet, NavLink } from "react-router-dom";
 import { buttonStyle, adminStyle } from "../Styles";
 import MyGrid from "../components/UI/MyGrid";
-
-/*
-<SimpleGrid
-        columns={{ sm: 1, md: 4, lg: 4 }}
-        spacing={1.5}
-        ml="40px"
-        mr="40px"
-        mb="3rem"
-      >
-      */
+import { useAuth } from "../contexts/authContext";
 
 export default function UserPage() {
   const isAdmin = true;
+
+  const { setUser } = useAuth();
+
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("token"); // or actual user data
+  //   if (storedUser) {
+  //     setUser(storedUser);
+  //   }
+  // }, []);
 
   return (
     <div>
@@ -34,8 +34,15 @@ export default function UserPage() {
               Manage Payments
             </Button>
           </NavLink>
-          <NavLink to="signout">
-            <Button w="100%" {...buttonStyle()}>
+          <NavLink to="/">
+            <Button
+              onClick={() => {
+                localStorage.removeItem("token");
+                setUser(null);
+              }}
+              w="100%"
+              {...buttonStyle()}
+            >
               Sign Out
             </Button>
           </NavLink>
@@ -52,38 +59,3 @@ export default function UserPage() {
     </div>
   );
 }
-
-/*
-
-
-<Flex
-        ml="40px"
-        mr="40px"
-        mb="30px"
-        gap={1.5}
-        direction="column"
-        align="center"
-      >
-        <NavLink to="orders">
-          <Button minW="700px" {...buttonStyle()}>
-            Order History{" "}
-          </Button>
-        </NavLink>
-        <NavLink to="details">
-          <Button minW="700px" {...buttonStyle()}>
-            Account Details{" "}
-          </Button>
-        </NavLink>
-        <NavLink to="payments">
-          <Button minW="700px" {...buttonStyle()}>
-            Manage Payments
-          </Button>
-        </NavLink>
-        <NavLink to="signout">
-          <Button minW="700px" {...buttonStyle()}>
-            Sign Out
-          </Button>
-        </NavLink>
-      </Flex>
-
-      */

@@ -4,6 +4,15 @@ const morgan = require("morgan");
 const app = express();
 module.exports = app;
 
+const cors = require("cors");
+
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+    credentials: true,
+  })
+);
+
 //Logging middleware.
 app.use(morgan("dev"));
 

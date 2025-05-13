@@ -1,10 +1,64 @@
-import React from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import { Text, Center, VStack, Input, Box, Button } from "@chakra-ui/react";
 import { inputStyle, buttonStyle } from "../Styles";
 import { NavLink } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../contexts/authContext";
+
+import axios from "axios";
 
 export default function Login() {
-  const handleSubmit = () => {};
+  const navigate = useNavigate();
+
+  const { setUser } = useAuth();
+
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { errors, isSubmitting },
+  } = useForm();
+
+  //we dont use this bc it createes a new state instead of using the global context
+  //const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate("/account");
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("token"); // or actual user data
+  //   if (storedUser) {
+  //     setUser(storedUser);
+  //   }
+  // }, []);
+
+  const onSubmit = async (values) => {
+    console.log(values);
+    try {
+      const { data } = await axios.post("http://localhost:3001/api/login", {
+        username: values.username,
+        password: values.password,
+      });
+      console.log("Login success:", data);
+      // Optional: save token
+      localStorage.setItem("token", data.token);
+      setUser(data.user);
+      console.log("Here's the user");
+      // Redirect or set user in context/state
+      navigate("/account");
+      reset();
+    } catch (err) {
+      console.error("Login error:", err.response?.data || err.message);
+      alert(
+        "Login failed: " + (err.response?.data?.error || "Unexpected error")
+      );
+    }
+  };
 
   return (
     <Center>
@@ -27,7 +81,7 @@ export default function Login() {
         </NavLink>
         <VStack
           as="form"
-          onSubmit={handleSubmit}
+          onSubmit={handleSubmit(onSubmit)}
           name={name}
           w="40%"
           spacing="6"
@@ -38,6 +92,9 @@ export default function Login() {
             type="text"
             placeholder="Username"
             {...inputStyle}
+            {...register("username", {
+              required: "This field is required.",
+            })}
           />
 
           {name === "signup" && (
@@ -54,6 +111,10 @@ export default function Login() {
             type="password"
             placeholder="Password"
             {...inputStyle}
+            {...register("password", {
+              required: "This field is required.",
+              minLength: { value: 4, message: "Minimum length should be 4." },
+            })}
           />
 
           {name === "signup" && (
@@ -71,6 +132,8 @@ export default function Login() {
             {...buttonStyle()}
             transform="translateY(3.5px)"
           >
+            {" "}
+            Submit
             {""}
           </Box>
         </VStack>

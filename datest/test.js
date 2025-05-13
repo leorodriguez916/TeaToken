@@ -23,4 +23,4 @@ function decode(messagefile) {
   return message;
 }
 
-console.log(decode("coding_qual_input.txt"));
+// console.log(decode("coding_qual_input.txt"));

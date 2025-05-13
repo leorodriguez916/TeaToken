@@ -57,6 +57,7 @@ export function editProduct(id, product) {
 }
 export function deleteProduct(id) {
   return async function (dispatch) {
+    console.log("deleting from reducer");
     try {
       await axios.delete(`/api/products/${id}`, {
         headers: { authorization: localStorage.getItem("token") },

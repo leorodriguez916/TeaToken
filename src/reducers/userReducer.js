@@ -5,6 +5,36 @@ export const EDIT_USER = "EDIT_USER";
 export const CREATE_USER = "CREATE_USER";
 export const DELETE_USER = "DELETE_USER";
 
+function _createUser(user) {
+  return {
+    type: CREATE_USER,
+    user,
+  };
+}
+
+function _deleteUser(id) {
+  return {
+    type: DELETE_USER,
+    id,
+  };
+}
+
+export function createUser(user) {
+  return async function (dispatch) {
+    try {
+      const { data } = await axios.post("http://localhost:3001/api/signup");
+      dispatch(_createUser(data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+}
+
+// In code block above after URL
+// user, {
+//   headers: { authorization: localStorage.getItem("token") },
+// }
+
 export const userState = {
   allUsers: [],
   singleUser: {},

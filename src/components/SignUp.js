@@ -12,63 +12,67 @@ import {
 } from "@chakra-ui/react";
 import { inputStyle, buttonStyle } from "../Styles";
 import { GOT_USER, CREATE_USER, userState } from "../reducers/userReducer";
+import { UserContext } from "../contexts/userContext";
 import { useReducer, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { userReducer } from "../reducers/userReducer";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 export default function SignUp() {
   const {
     handleSubmit,
     register,
+    reset,
     formState: { errors, isSubmitting },
   } = useForm();
 
-  function onSubmit(values) {
-    console.log("Hello");
-    console.log(values);
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        alert(JSON.stringify(values, null, 2));
-        resolve();
-      }, 3000);
-    });
-  }
+  const onSubmit = async (values) => {
+    console.log("Submitting form with values:", values);
+    if (values.password !== values.passwordConfirm) {
+      alert("Passwords do not match.");
+      return;
+    }
 
-  // const handleSubmit = () => {
-  //   const postData = async () => {
-  //     try {
-  //       const { data } = await axios.post(`http://localhost:3001/signup`, {
-  //         username: name,
-  //         password: password,
-  //         passwordConfirm: passwordConfirm,
-  //         token: null,
-  //         email: email,
-  //         role: customer,
-  //       });
-  //       dispatch({ type: CREATE_USER, user });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //     postData();
-  //   };
-  // };
+    try {
+      console.log("Sending request to backend...");
+      const { data } = await axios.post(`http://localhost:3001/api/signup`, {
+        name: values.username,
+        password: values.password,
+        passwordConfirm: values.passwordConfirm,
+        token: null,
+        email: values.email,
+        role: "customer",
+      });
+
+      console.log("Received response:", data);
+      dispatch({ type: CREATE_USER, user: data });
+
+      alert("User created!");
+      reset();
+    } catch (error) {
+      console.error("Signup error:", error);
+      alert("Failed to create user.");
+    }
+  };
 
   const [users, dispatch] = useReducer(userReducer, userState);
   const { id } = useParams();
   const isAdmin = true;
+
+  //from form control and vstack, removed:
+  //name={name}
 
   return (
     <Center>
       <VStack
         as="form"
         onSubmit={handleSubmit(onSubmit)}
-        name={name}
         w="40%"
         spacing="6"
         marginBottom={4}
       >
-        <FormControl isInvalid={errors.name} name={name}>
+        <FormControl isInvalid={errors.name}>
           <Input
             mb="10px"
             id="username"
@@ -76,10 +80,10 @@ export default function SignUp() {
             {...inputStyle}
             {...register("username", {
               required: "This field is required.",
-              minLength: { value: 4, message: "Minimum length should be 4." },
             })}
           />
           <Input
+            type="email"
             mb="10px"
             id="email"
             placeholder="Email"
@@ -110,7 +114,7 @@ export default function SignUp() {
             })}
           />
 
-          <FormErrorMessage>
+          <FormErrorMessage isInvalid={true}>
             {errors.name && errors.name.message}
           </FormErrorMessage>
         </FormControl>
@@ -122,57 +126,6 @@ export default function SignUp() {
         >
           Submit
         </Button>
-        {/* <VStack
-        as="form"
-        onSubmit={handleSubmit}
-        name={name}
-        w="40%"
-        spacing="6"
-        marginBottom={4}
-      >
-        <Text pb="10px" color="tea.green">
-          Enter a username and password to get started.
-        </Text>
-
-        <Input name="email" type="email" placeholder="Email" {...inputStyle} />
-        {name === "signup" && (
-          <Input
-            name="email"
-            type="email"
-            placeholder="Email"
-            {...inputStyle}
-          />
-        )}
-        <Input
-          name="password"
-          type="password"
-          placeholder="Password"
-          {...inputStyle}
-        />
-        <Input
-          name="passwordconfirm"
-          type="password"
-          placeholder="Confirm Password"
-          {...inputStyle}
-        />
-        {name === "signup" && (
-          <Input
-            name="confirmPassword"
-            type="password"
-            placeholder="Confirm Password"
-            {...inputStyle}
-          />
-        )}
-        <Box
-          as="button"
-          type="submit"
-          {...buttonStyle()}
-          transform="translateY(3.5px)"
-          onSubmit={handleSubmit()}
-        >
-          {"Submit"}
-        </Box>
-      </VStack> */}
       </VStack>
     </Center>
   );

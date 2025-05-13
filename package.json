@@ -34,9 +34,9 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "start:dev": "concurrently -n FRONTEND,BACKEND -c blue,green \"npm run start\" \"npm run start-server\"",
     "build:dev": "npm run build -- --watch --mode=development",
     "seed": "node script/seed.js",
-    "start:dev": "npm run start & npm run start-server",
     "start:dev:logger": "LOGGING=true npm run start:dev",
     "start:dev:seed": "SEED=true npm run start:dev",
     "start-server": "JWT=shh node server -e html,js,scss --ignore public --ignore client",
@@ -62,5 +62,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }

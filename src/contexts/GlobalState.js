@@ -2,6 +2,7 @@ import React, { useEffect, useState, useReducer } from "react";
 import { cartReducer, cartState } from "../reducers/cartReducer";
 import ProductContextProvider, { ProductContext } from "./productContext";
 import CartContextProvider, { CartContext } from "./cartContext";
+import { AuthProvider } from "./authContext";
 import {
   productReducer,
   productState,
@@ -27,24 +28,26 @@ const GlobalState = (props) => {
   }
 
   return (
-    <ProductContext.Provider
-      value={{
-        products: product,
-        singleProduct: product.singleProduct,
-        allProducts: product.allProducts,
-        getProducts: getProducts,
-        dispatch: dispatchProduct,
-      }}
-    >
-      <CartContext.Provider
+    <AuthProvider>
+      <ProductContext.Provider
         value={{
-          cart: cart.cart,
-          dispatch: dispatchCart,
+          products: product,
+          singleProduct: product.singleProduct,
+          allProducts: product.allProducts,
+          getProducts: getProducts,
+          dispatch: dispatchProduct,
         }}
       >
-        {props.children}
-      </CartContext.Provider>
-    </ProductContext.Provider>
+        <CartContext.Provider
+          value={{
+            cart: cart.cart,
+            dispatch: dispatchCart,
+          }}
+        >
+          {props.children}
+        </CartContext.Provider>
+      </ProductContext.Provider>
+    </AuthProvider>
   );
 };
 

@@ -1,10 +1,12 @@
 const { db } = require("./db");
-const cors = require("cors");
-const corsOptions = {
-  origin: "*",
-  credentials: true, //access-control-allow-credentials:true
-  optionSuccessStatus: 200,
-};
+// const cors = require("cors");
+// const corsOptions = {
+//   origin: "*",
+//   credentials: true, //access-control-allow-credentials:true
+//   optionSuccessStatus: 200,
+// };
+
+require("dotenv").config();
 
 // const PORT = process.env.PORT || 3000;
 const PORT = 3001;

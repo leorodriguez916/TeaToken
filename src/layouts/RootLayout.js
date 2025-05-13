@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import MyGrid from "../components/UI/MyGrid";
 import { inputStyle, buttonStyle, adminStyle } from "../Styles";
 import {
@@ -21,6 +21,7 @@ import {
   Button,
 } from "@chakra-ui/react";
 import { NavLink, Outlet } from "react-router-dom";
+import { useAuth } from "../contexts/authContext";
 
 export default function RootLayout() {
   const navStyles = {
@@ -38,6 +39,19 @@ export default function RootLayout() {
 
   let isAdmin = true;
 
+  const { user, loading } = useAuth();
+
+  console.log(user);
+
+  // useEffect(() => {
+  //   const storedUser = localStorage.getItem("token"); // or actual user data
+  //   if (storedUser) {
+  //     setUser(storedUser);
+  //   }
+  // }, []);
+
+  if (loading) return null;
+
   return (
     <div>
       <MyGrid
@@ -52,24 +66,41 @@ export default function RootLayout() {
             <NavLink to="/">TeaTokens</NavLink>
           </Heading>
           <Spacer />
-          <NavLink to="/account">
-            <Icon as={AiOutlineSmile} w="7" h="7" />
-          </NavLink>
           <NavLink to="/checkout">
             <Icon as={AiOutlineShoppingCart} w="7" h="7" />
           </NavLink>
-          <NavLink to="/login">
-            <Button
-              minW="100px"
-              maxW="200px"
-              w="100%"
-              {...buttonStyle()}
-              color="tea.brown"
-              bgColor="tea.light.50"
-            >
-              Log In
-            </Button>
-          </NavLink>
+          {!user ? (
+            <NavLink to="/login">
+              <Button
+                minW="100px"
+                maxW="200px"
+                w="100%"
+                {...buttonStyle()}
+                color="tea.brown"
+                bgColor="tea.light.50"
+              >
+                Log In
+              </Button>
+            </NavLink>
+          ) : (
+            <NavLink to="/account">
+              <Icon as={AiOutlineSmile} w="7" h="7" />
+            </NavLink>
+          )}
+          {user ? (
+            <NavLink to="/account">
+              <Button
+                minW="100px"
+                maxW="200px"
+                w="100%"
+                {...buttonStyle()}
+                color="tea.brown"
+                bgColor="tea.light.50"
+              >
+                Welcome, {user.username}
+              </Button>
+            </NavLink>
+          ) : null}
         </GridItem>
       </MyGrid>
 

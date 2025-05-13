@@ -71,6 +71,7 @@ export default function Products() {
 
   //Deletes products in the database.
   const deleteProduct = async (product) => {
+    console.log("deleting1");
     try {
       const { data } = await axios.delete(
         `http://localhost:3001/api/products/${product.id}`
