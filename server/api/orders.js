@@ -3,6 +3,7 @@ const {
   models: { Order, OrderItem, Product },
 } = require("../db");
 module.exports = router;
+const authenticateToken = require("../middleware/auth");
 
 //CREATE @ /api/
 //Adds a product to a user's cart.
@@ -45,6 +46,38 @@ router.get("/", async (req, res, next) => {
     res.status(200).json(orders);
   } catch (err) {
     next(err);
+  }
+});
+
+//GET @ /api/orders/user/:userId
+//Access all orders based on a certain user ID.
+router.get("/user/:userId", authenticateToken, async (req, res) => {
+  try {
+    // Ensure user is only accessing their own orders
+    console.log("Fetching orders for user:", req.params.userId);
+
+    if (req.user.id !== parseInt(req.params.userId)) {
+      return res.status(403).json({ error: "Access denied." });
+    }
+
+    const orders = await Order.findAll({
+      where: {
+        userId: req.params.userId,
+        isInCart: false,
+      },
+      include: [
+        {
+          model: OrderItem,
+          include: [Product],
+        },
+      ],
+      order: [["createdAt", "DESC"]],
+    });
+    console.log("Orders: ", orders);
+    res.json(orders);
+  } catch (err) {
+    console.error("Error fetching orders:", err);
+    res.status(500).json({ error: "Failed to load order history" });
   }
 });
 

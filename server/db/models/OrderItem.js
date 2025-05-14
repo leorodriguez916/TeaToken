@@ -21,7 +21,6 @@ const OrderItem = db.define("product_in_cart", {
       min: 0,
     },
   },
-  totalPrice: productPrice ** quantity,
 });
 
 module.exports = OrderItem;

@@ -29,7 +29,7 @@ function _deleteUser(id) {
 }
 
 export const loginUser = async (user, dispatch) => {
-  console.log("Calling createUser with:", user);
+  console.log("Calling loginUser with:", user);
 
   try {
     const { data } = await axios.post("http://localhost:3001/api/login", {

@@ -237,18 +237,87 @@ async function seed() {
 
   //Example order data.
   const orders = await Promise.all([
-    Order.create({ isCart: true }),
-    Order.create({ isCart: true }),
-    Order.create({ isCart: true }),
-    Order.create({ isCart: true }),
-    Order.create({ isCart: true }),
-    Order.create({ isCart: false, subTotal: 20.99 }),
-    Order.create({ isCart: false, subTotal: 25.99 }),
-    Order.create({ isCart: false, subTotal: 23.99 }),
-    Order.create({ isCart: false, subTotal: 30.99 }),
-    Order.create({ isCart: false, subTotal: 10.99 }),
-    Order.create({ isCart: false, subTotal: 8.99 }),
+    Order.create({
+      userId: users[0].id,
+      isInCart: true,
+      subTotal: 100,
+      status: "complete",
+    }),
+    Order.create({
+      userId: users[0].id,
+      isInCart: true,
+      subTotal: 100,
+      status: "complete",
+    }),
+    Order.create({
+      userId: users[1].id,
+      isInCart: true,
+      subTotal: 100,
+      status: "complete",
+    }),
+    Order.create({
+      userId: users[1].id,
+      isInCart: true,
+      subTotal: 100,
+      status: "complete",
+    }),
+    Order.create({
+      userId: users[2].id,
+      isInCart: true,
+      subTotal: 100,
+      status: "complete",
+    }),
+    Order.create({
+      userId: users[2].id,
+      isInCart: false,
+      subTotal: 20.99,
+      status: "complete",
+    }),
+    Order.create({
+      userId: users[3].id,
+      isInCart: false,
+      subTotal: 25.99,
+      status: "complete",
+    }),
+    Order.create({
+      userId: users[3].id,
+      isInCart: false,
+      subTotal: 23.99,
+      status: "complete",
+    }),
+    Order.create({
+      userId: users[4].id,
+      isInCart: false,
+      subTotal: 30.99,
+      status: "complete",
+    }),
+    Order.create({
+      userId: users[4].id,
+      isInCart: false,
+      subTotal: 10.99,
+      status: "complete",
+    }),
+    Order.create({
+      userId: users[5].id,
+      isInCart: false,
+      subTotal: 8.99,
+      status: "complete",
+    }),
   ]);
+
+  await OrderItem.create({
+    orderId: orders[2].id,
+    productId: products[0].id,
+    quantity: 2,
+    totalPriceForProduct: 2 * products[0].price,
+  });
+
+  await OrderItem.create({
+    orderId: orders[2].id,
+    productId: products[1].id,
+    quantity: 1,
+    totalPriceForProduct: products[1].price,
+  });
 
   // Generate products.
   const giveMeRandomProducts = () => {
