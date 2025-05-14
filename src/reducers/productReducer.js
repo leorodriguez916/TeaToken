@@ -55,6 +55,7 @@ export function editProduct(id, product) {
     }
   };
 }
+
 export function deleteProduct(id) {
   return async function (dispatch) {
     console.log("deleting from reducer");

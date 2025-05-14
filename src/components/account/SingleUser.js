@@ -14,15 +14,17 @@ import {
 } from "@chakra-ui/react";
 import { GOT_USER, userState } from "../../reducers/userReducer";
 import { useReducer, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { userReducer } from "../../reducers/userReducer";
+import { useParams, useNavigate } from "react-router-dom";
+import { userReducer, deleteUser } from "../../reducers/userReducer";
 import { buttonStyle, adminStyle } from "../../Styles";
 import axios from "axios";
+import { useAuth } from "../../contexts/authContext";
 
 export default function SingleUser(auth = { id: 1, role: "none" }) {
   const [users, dispatch] = useReducer(userReducer, userState);
   const { id } = useParams();
   const { me, loading } = useAuth();
+  const navigate = useNavigate();
   let isAdmin = me ? me.role === "admin" : false;
 
   useEffect(() => {
@@ -39,14 +41,22 @@ export default function SingleUser(auth = { id: 1, role: "none" }) {
     fetchData();
   }, []);
 
+  const onSubmit = async (id, dispatch) => {
+    console.log(dispatch);
+    const result = await deleteUser(id, dispatch);
+    console.log(result);
+    // if (!result.success) {
+    //   alert(result.message);
+    // } else {
+    //   alert(result.message);
+    //   navigate("/");
+    //   reset();
+    // }
+  };
+
   const user = users.singleUser;
 
-  console.log(user);
-  console.log(auth);
-
-  const url = `../../${user.imageSrc}`;
-
-  return user.id && isAdmin ? (
+  return me.id ? (
     <Center>
       <HStack justify="center" wrap="wrap">
         <VStack pl="30px" m="20px">
@@ -54,16 +64,21 @@ export default function SingleUser(auth = { id: 1, role: "none" }) {
             borderRadius="full"
             minW="200px"
             boxSize="200px"
-            src={url}
+            src="../../Black_Rose.png"
+            bgImage={`../../${user.imageSrc}`}
+            bgPosition="center"
+            bgRepeat="no-repeat"
             alt="user image"
           ></Image>
           <HStack pt="20px" spacing="10px">
             {" "}
             <Text color="tea.green">ID#:</Text> <Spacer />
             <Text color="tea.matcha">{user.id}</Text> <Spacer />
-            <Button onClick={() => deleteUser(user.id)} {...adminStyle()}>
-              Remove User{" "}
-            </Button>
+            {me?.role === "admin" && (
+              <Button onClick={() => onSubmit(user.id)} {...adminStyle()}>
+                Remove User{" "}
+              </Button>
+            )}
           </HStack>
         </VStack>
 

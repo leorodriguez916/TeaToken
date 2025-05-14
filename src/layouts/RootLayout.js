@@ -53,7 +53,7 @@ export default function RootLayout() {
         bgColor="tea.green"
       >
         <GridItem gridColumn="1 / -1" as={HStack} spacing="2rem" sx={navStyles}>
-          <Heading textTransform={"lowercase"}>
+          <Heading textTransform={"lowercase"} color="tea.orchid">
             <NavLink to="/">TeaTokens</NavLink>
           </Heading>
           <Spacer />
@@ -74,7 +74,7 @@ export default function RootLayout() {
               </Button>
             </NavLink>
           ) : (
-            <NavLink to="/account">
+            <NavLink to={`/account/users/${me.id}`}>
               <Button
                 w="100%"
                 {...buttonStyle()}

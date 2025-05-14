@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useEffect, useState, useReducer, useParams } from "react";
 import { Button, HStack, Center } from "@chakra-ui/react";
 import { Outlet, NavLink } from "react-router-dom";
 import { buttonStyle, adminStyle } from "../Styles";
@@ -9,11 +9,11 @@ export default function UserPage() {
   const { me, setMe, loading } = useAuth();
   let isAdmin = me ? me.role === "admin" : false;
 
-  return (
+  return me ? (
     <div>
       <Center>
         <HStack justify="center" mx="30px" mb="30px" wrap="wrap">
-          <NavLink to="/account">
+          <NavLink to={`/account/users/${me.id}`}>
             <Button {...buttonStyle()}>Account Details </Button>
           </NavLink>
           <NavLink to="orders">
@@ -26,7 +26,7 @@ export default function UserPage() {
               Manage Payments
             </Button>
           </NavLink>
-          <NavLink to="/">
+          <NavLink to="../">
             <Button
               onClick={() => {
                 localStorage.removeItem("token");
@@ -49,5 +49,5 @@ export default function UserPage() {
       </Center>
       <Outlet />
     </div>
-  );
+  ) : null;
 }

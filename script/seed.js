@@ -21,6 +21,7 @@ async function seed() {
       email: "leorodriguez916@gmail.com",
       points: 100000,
       role: "admin",
+      imageSrc: "player2.png",
     }),
     User.create({
       username: "vida",
@@ -28,6 +29,7 @@ async function seed() {
       email: "vida@gmail.com",
       points: 100000,
       role: "admin",
+      imageSrc: "player.png",
     }),
     User.create({
       username: "maddd4tea5",
@@ -35,6 +37,7 @@ async function seed() {
       email: "nowbrewing456@yahoo.com",
       points: 200,
       role: "customer",
+      imageSrc: "player.png",
     }),
     User.create({
       username: "teafiend",
@@ -42,6 +45,7 @@ async function seed() {
       email: "janedoe@gmail.com",
       points: 200,
       role: "customer",
+      imageSrc: "player.png",
     }),
     User.create({
       username: "elmroastery",
@@ -49,6 +53,7 @@ async function seed() {
       email: "elmroastery@gmail.com",
       points: 2000,
       role: "customer",
+      imageSrc: "player.png",
     }),
     User.create({
       username: "starbucks",
@@ -56,6 +61,7 @@ async function seed() {
       email: "kevin.johnson@starbucks.com",
       points: 40000,
       role: "customer",
+      imageSrc: "player.png",
     }),
     User.create({
       username: "liam",
@@ -63,6 +69,7 @@ async function seed() {
       email: "liam@eirishexports.com",
       points: 6000,
       role: "customer",
+      imageSrc: "player.png",
     }),
     User.create({
       username: "ericaray",
@@ -70,6 +77,7 @@ async function seed() {
       email: "erica7555@gmail.com",
       points: 300,
       role: "customer",
+      imageSrc: "player.png",
     }),
   ]);
 

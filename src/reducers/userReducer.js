@@ -28,6 +28,24 @@ function _deleteUser(id) {
   };
 }
 
+export const deleteUser = async (id, dispatch) => {
+  console.log("deleting user from reducer");
+  console.log(dispatch);
+  try {
+    const { data } = await axios.delete(
+      `http://localhost:3001/api/users/${id}`
+    );
+    dispatch(_deleteUser(id));
+
+    return {
+      success: true,
+      message: "Delete successful.",
+    };
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 export const loginUser = async (user, dispatch) => {
   console.log("Calling loginUser with:", user);
 

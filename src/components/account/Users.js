@@ -30,7 +30,6 @@ export default function Users() {
   const { me, loading } = useAuth();
   let isAdmin = me ? me.role === "admin" : false;
   let userList = users.allUsers;
-  console.log(userList);
 
   return (
     <div>

@@ -28,7 +28,7 @@ export default function ListUser({
   deleteUser,
   view = false,
 }) {
-  if (user.imageSrc === "user.jpeg") user.imageSrc = "../user.jpeg";
+  // if (user.imageSrc === "user.jpeg") user.imageSrc = "../user.jpeg";
 
   const [userData, dispatch] = useReducer(userReducer, userState);
 
@@ -62,7 +62,11 @@ export default function ListUser({
       <Image
         borderRadius="20px"
         boxSize="100px"
-        src={user.imageSrc}
+        src={"../Black_Rose.png"}
+        bgImage={`../${user.imageSrc}`}
+        bgPosition="center"
+        bgRepeat="no-repeat"
+        //bgImage={user.imageSrc}
         alt="user image"
       ></Image>
       <Text color="tea.green">

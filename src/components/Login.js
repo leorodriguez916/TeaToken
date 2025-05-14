@@ -9,7 +9,7 @@ import { userState, loginUser, userReducer } from "../reducers/userReducer";
 import axios from "axios";
 
 export default function Login() {
-  const { setMe } = useAuth();
+  const { me, setMe } = useAuth();
   const [users, dispatch] = useReducer(userReducer, userState);
   const navigate = useNavigate();
   const {
@@ -24,8 +24,8 @@ export default function Login() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      navigate("/account");
+    if (token && me && me.id) {
+      navigate(`/account/users/${me.id}`);
     }
   }, []);
 
@@ -37,14 +37,14 @@ export default function Login() {
       localStorage.setItem("token", result.token);
       setMe(result.user);
       alert(result.message);
-      navigate("/account");
+      navigate(`/account/users/${result.user.id}`);
     } else {
       console.log(result);
       alert(result.message.error);
     }
   };
 
-  return (
+  return !me ? (
     <Center>
       <VStack>
         <NavLink to="/signup">
@@ -124,5 +124,5 @@ export default function Login() {
         </VStack>
       </VStack>
     </Center>
-  );
+  ) : null;
 }

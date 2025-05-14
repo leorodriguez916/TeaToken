@@ -33,3 +33,16 @@ router.get("/:id", async (req, res, next) => {
     next(err);
   }
 });
+
+//DELETE @ /api/users/:userId
+//Delete a user as an admin.
+router.delete("/:id", async (req, res, next) => {
+  try {
+    await User.destroy({
+      where: { id: req.params.id },
+    });
+    res.status(204).json({ status: "Delete successful." });
+  } catch (err) {
+    next(err);
+  }
+});

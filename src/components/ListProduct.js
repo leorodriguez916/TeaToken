@@ -32,7 +32,7 @@ export default function ListProduct({
         <Text color="tea.matcha" mr="5px">
           {product.price}
         </Text>
-        <Button {...buttonStyle()}>Add</Button>
+        <Button onClick={() => addProduct(product)} {...buttonStyle()}>Add</Button>
         {me && me.role === "admin" ? (
           <Button
             onClick={() => deleteProduct(product)}

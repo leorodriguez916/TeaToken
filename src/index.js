@@ -10,6 +10,7 @@ const colors = {
     dark: "#004002",
     green: "#556b2f",
     matcha: "#a9a454",
+    orchid: "#DA70D6",
     light: { 50: "#F3F3F2", 100: "#f8f4ed", 200: "#efe4d4" },
     brown: "#b07946",
   },
